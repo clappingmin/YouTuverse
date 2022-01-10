@@ -1,17 +1,12 @@
-from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+from pymongo import MongoClient
+
+from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
-from pymongo import MongoClient
-
 client = MongoClient('localhost', 27017)
-db = client.dbsparta
+db = client.youtuverse
 
-SECRET_KEY = 'YOUTUVERSE'
-
-import jwt
-import datetime
-import hashlib
 
 # HTML 화면 보여주기
 @app.route('/')
@@ -34,20 +29,9 @@ def show_top3_youtuber():
 
     return jsonify({'youtubers': youtuber})
 
-@app.route('/login')
-def login_page():
-    return render_template('login.html')
-
-@app.route('/signup')
-def signup_page():
-    return render_template('signup.html')
 
 
-# APIs
-@app.route('/api/user/new', methods=['POST'])
-def api_register():
 
-    return jsonify({'result': 'success'})
 
 
 if __name__ == '__main__':

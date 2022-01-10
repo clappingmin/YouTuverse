@@ -1,0 +1,183 @@
+body {
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* HEADER */
+header {
+    position: relative;
+    background-color: blue;
+}
+
+header .inner {
+    width: 1200px;
+    height: 80px;
+    margin: 0 auto;
+    background-color: orange;
+    position: relative;
+    display: flex;
+
+}
+
+header .inner a.title {
+    background-color: white;
+    margin: auto 10px;
+    min-width: 100px;
+
+}
+
+header .inner ul.menu {
+    display: flex;
+    position: absolute;
+    background-color: pink;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+header .inner ul.menu li {
+    display: block;
+    background-color: aqua;
+    margin: auto;
+}
+
+header .inner ul.menu li a {
+    padding: 11px 16px;
+    display: block;
+    color: #656565;
+    background-color: yellow;
+    margin: auto 10px;
+}
+
+header .inner ul.menu li a:hover {
+    color: #000;
+}
+
+header .search {
+    background-color: red;
+    height: 34px;
+    position: relative;
+    margin: auto 20px;
+}
+
+header .search input {
+    min-width: 200px;
+    max-width: 400px;
+    width: 400px;
+    height: 34px;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: none;
+    background-color: #fff;
+    color: #777;
+}
+
+header .search .material-icons {
+    height: 24px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+/* 메인 페이지 */
+.inner {
+    width: 1200px;
+    height: 1000px;
+    margin: 0 auto;
+    background-color: blueviolet;
+}
+
+.inner .top3-cards h3 {
+    background-color: aliceblue;
+    font-size: 35px;
+    padding: 20px;
+}
+
+.inner .cards {
+    background-color: chartreuse;
+    width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.inner .cards .rank {
+    width: 30px;
+    height: 30px;
+}
+
+.inner .cards .card {
+    width: 300px;
+    height: 200px;
+    background-color: royalblue;
+    border: 2pt groove #ffc6b3;
+    border-radius: 10px;
+    position: relative;
+    margin: 25px;
+}
+
+.inner .cards .card a {
+    width: 100%;
+    background-color: yellow;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    box-sizing: content-box;
+    justify-content: center;
+
+
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+}
+
+.inner .cards .card a .card-img {
+    width: 120px;
+    height: 120px;
+    margin: auto 8px;
+}
+
+.inner .cards .card a .card-title {
+    background-color: pink;
+    display: block;
+    margin: auto 0;
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
+
+
+}
+
+.inner .all-cards h3 {
+    background-color: aliceblue;
+    font-size: 35px;
+    padding: 20px;
+}
+
+.inner #up-btn {
+    width: 60px;
+    height: 60px;
+    position:fixed;
+    z-index:999;
+    bottom:20px;
+    right:20px;
+    -webkit-box-shadow: 0 1px 2px 0 #777;
+    box-shadow: 0 1px 2px 0 #777;
+    border-radius: 100px;
+}
+

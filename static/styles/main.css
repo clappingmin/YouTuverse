@@ -107,8 +107,8 @@ header .search .material-icons {
 
 
 .inner .top3-cards {
-/*position: absolute;*/
-/*    top: 80px;*/
+    /*position: absolute;*/
+    /*    top: 80px;*/
 }
 
 .inner .top3-cards h3 {
@@ -140,16 +140,24 @@ header .search .material-icons {
 .inner .cards .card {
     width: 300px;
     height: 200px;
-    background-color: royalblue;
-    border: 2pt groove #ffc6b3;
+    background-color: rgb(43 43 43);
     border-radius: 10px;
     position: relative;
     margin: 25px;
+    transition: transform .8s,
+    background-color 0.6s;
+}
+
+.inner .cards .card:hover {
+    background-color: rgb(60 63 64);
+    filter: brightness(50%);
+    transform: scale(1.2);
+
+
 }
 
 .inner .cards .card a {
     width: 100%;
-    background-color: yellow;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -170,7 +178,8 @@ header .search .material-icons {
 }
 
 .inner .cards .card a .card-title {
-    background-color: pink;
+    color: #fff;
+    text-align: center;
     display: block;
     margin: auto 0;
     font-size: 20px;

@@ -65,7 +65,7 @@
 <!--Header-->
 <header>
     <div class="inner">
-        <a href="#" class="title">
+        <a href="/" class="title">
             <div class="title">YouTuverse</div>
         </a>
         <ul class="menu">
@@ -78,7 +78,7 @@
             <li>
                 <a href="#">유튜버 추가</a>
             </li>
-            {% if user['nickname']!= "" %}
+            {% if user %}
                 <span>안녕하세요 {{ user['nickname'] }}님!</span>
                <li>
                     <a href="/login">로그아웃</a>

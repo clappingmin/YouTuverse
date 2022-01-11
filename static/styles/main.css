@@ -29,6 +29,7 @@ header .inner {
 
 header .inner a.title {
     margin: auto 0;
+    z-index: 999999;
 
 }
 

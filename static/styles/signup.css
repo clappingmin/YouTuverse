@@ -1,0 +1,54 @@
+.sign-up-page,
+.log-in-page{
+  min-height: 100vh;
+}
+.inner{
+  width: 1200px; margin: 0 auto;
+}
+
+.sign-up-form,
+.log-in-form{
+  width: 380px; padding: 16px; margin: 54px auto 0;
+  background-color: #fff; border-radius: 6px;
+  box-shadow: rgba(255, 255, 255, 0.5) 0px 7px 29px 0px;
+  /*box-shadow: rgba(255, 255, 255, 0.7) 0px 5px 15px;*/
+}
+.sign-up-form > h1{
+  color: rgb(24 24 24); text-align: center;
+}
+.sign-up-form > form{
+  display: flex; flex-direction: column; align-items: center;
+}
+.sign-up-form > form > .form-group{
+  width: 100%;
+}
+.sign-up-form > form > .form-group > label{
+  color: rgb(24 24 24);
+}
+
+
+.log-in-form > h1{
+  color: rgb(24 24 24); text-align: center;
+}
+.log-in-form > form{
+  display: flex; flex-direction: column; align-items: center;
+}
+.log-in-form > form > .form-group{
+  width: 100%;
+}
+.log-in-form > form > .form-group > label{
+  color: rgb(24 24 24);
+}
+.log-in-form > form > .log-in-btn{
+  margin-bottom: 8px;
+}
+.log-in-form > form > .side-btns{
+  display: flex; flex-direction: row; justify-content: space-between;
+  width: 100%; margin-bottom: 8px;
+}
+.log-in-form > form > .side-btns > button{
+  width: 49%;
+}
+.log-in-form > form > .pw-check-btn{
+  width: 100%;
+}

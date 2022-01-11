@@ -42,17 +42,18 @@ def login_page():
 def pw_find_page():
     return render_template('login_pw.html')
 
-# 유튜버 상세 페이지로 이동
+# 유튜버 상세페이지로 데이터 전달
 @app.route('/api/youtuber/<id>')
 def show_want_youtuber(id):
-    # id, name, photoURL, tags, likes
+    # id, name, photoURL, likes, url, videoSrc
     youtuber = db.youtuber.find_one({'id':id})
     name = youtuber['name']
     photoURL = youtuber['photoURL']
-    tags = youtuber['tags']
     likes = youtuber['likes']
+    url = youtuber['url']
+    videoSrc = youtuber['videoSrc']
 
-    return render_template('detail.html', id = id, name = name, photoURL = photoURL, tags = tags, likes = likes)
+    return render_template('detail.html', id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
 
 
 # APIs
@@ -128,18 +129,7 @@ def show_all_youtuber():
     youtuber = list(db.youtuber.find({}, {'_id': False}).sort("name"))
     return jsonify({'youtubers': youtuber})
 
-# 유튜버 상세페이지로 데이터 전달
-@app.route('/api/youtuber/<id>')
-def show_want_youtuber(id):
-    # id, name, photoURL, likes, url, videoSrc
-    youtuber = db.youtuber.find_one({'id':id})
-    name = youtuber['name']
-    photoURL = youtuber['photoURL']
-    likes = youtuber['likes']
-    url = youtuber['url']
-    videoSrc = youtuber['videoSrc']
 
-    return render_template('detail.html', id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
 
 
 

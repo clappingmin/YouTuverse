@@ -123,7 +123,7 @@ def show_want_youtuber(id):
     youtuber = db.youtuber.find_one({'id':id})
     name = youtuber['name']
     photoURL = youtuber['photoURL']
-    tags = youtuber['tags']
+    tags = youtuber['tages']
     likes = youtuber['likes']
 
     return render_template('detail.html', id = id, name = name, photoURL = photoURL, tags = tags, likes = likes)

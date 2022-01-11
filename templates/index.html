@@ -80,6 +80,9 @@
             </li>
             {% if user['nickname']!= "" %}
                 <span>안녕하세요 {{ user['nickname'] }}님!</span>
+               <li>
+                    <a href="/login">로그아웃</a>
+                </li>
             {% else %}
                 <li>
                     <a href="/login">로그인</a>

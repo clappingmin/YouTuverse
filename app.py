@@ -101,6 +101,11 @@ def login():
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
     return jsonify({ 'token': token })
 
+# 로그아웃
+@app.route('/api/user/logout', methods=['GET'])
+def logout():
+    return jsonify({ 'msg': 'success' })
+
 # 비밀번호 찾기
 @app.route('/api/user/password', methods=['POST'])
 def find_password():

@@ -40,9 +40,25 @@ $pwFindBtn.click((e) => {
 
 $logoutBtn.click((e) => {
   e.preventDefault();
-  const YouTuverse_token = $.cookie('YouTuverse_token')
-  $.removeCookie('YouTuverse_token', YouTuverse_token)
-  window.location.href = '/'
+
+  $.ajax({
+    type: 'GET',
+    url: '/api/user/logout',
+    data: {},
+    success: (res) => {
+      if(res.msg === 'success') {
+        const YouTuverse_token = $.cookie('YouTuverse_token')
+        $.removeCookie('YouTuverse_token', YouTuverse_token)
+        window.location.href = '/'
+      }
+    },
+    error: (error) => {
+      alert('로그아웃에 실패하였습니다: ', error)
+      window.location.href = '/'
+    }
+  })
+
+
 })
 
 $pwFindCheckBtn.click((e) => {

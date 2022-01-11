@@ -76,7 +76,7 @@ def login():
     user = db.users.find_one({ 'user_id': user_id }, { '_id': False })
     if user is None:
         return jsonify({ 'msg': '존재하지 않는 ID입니다.' })
-    
+
     hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
     if hashed_password != user['password']:
         return jsonify({ 'msg': '비밀번호가 일치하지 않습니다.' })

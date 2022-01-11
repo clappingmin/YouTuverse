@@ -15,6 +15,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
           integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
           crossorigin="anonymous"></script>
+
+  <!-- 머티리얼 아이콘을 위한 CDN 설치   -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
   <!-- css -->
   <link rel="stylesheet" href="../static/styles/global.css">
@@ -34,10 +37,11 @@
 
 <body>
   <div class="sign-up-page">
-    <div class="inner">
-      <header>
+    <!--Header-->
+    <header>
+      <div class="inner">
         <a href="#" class="title">
-         <div class="title">YouTuverse</div>
+          <div class="title">YouTuverse</div>
         </a>
         <ul class="menu">
           <li>
@@ -50,13 +54,15 @@
             <a href="#">유튜버 추가</a>
           </li>
           <li>
-            <a href="#">로그인</a>
+            <a href="/login">로그인</a>
           </li>
           <li>
-            <a href="#">회원가입</a>
+            <a href="/signup">회원가입</a>
           </li>
         </ul>
-      </header>
+      </div>
+    </header>
+    <div class="inner">
 
       <div class="sign-up-form">
         <h1>회원가입</h1>

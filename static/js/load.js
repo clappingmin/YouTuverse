@@ -68,18 +68,5 @@ function showTop3Youtuber() {
 }
 
 function showwantYoutuber(id) {
-    window.location.href = `/api/youtuber/${id}`
-
-    $.ajax({
-        type: "GET",
-        url: `/api/youtuber/${id}`,
-        data: {},
-        error: function (xhr, status, error) {
-            alert("에러 발생!");
-        },
-        success: function (response) {
-
-        }
-    })
-
+    window.location.href = `/youtuber/${id}`
 }

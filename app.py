@@ -43,7 +43,7 @@ def pw_find_page():
     return render_template('login_pw.html')
 
 # 유튜버 상세페이지로 데이터 전달
-@app.route('/api/youtuber/<id>')
+@app.route('/youtuber/<id>')
 def show_want_youtuber(id):
     # id, name, photoURL, likes, url, videoSrc
     youtuber = db.youtuber.find_one({'id':id})

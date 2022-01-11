@@ -1,4 +1,5 @@
 const $logInBtn = $('#logInBtn');
+const $logoutBtn = $('#logoutBtn');
 const $pwFindBtn = $('#pwFindBtn');
 const $signUpBtn = $('#signUpBtn');
 const $pwFindCheckBtn = $('#pwFindCheckBtn');
@@ -36,6 +37,13 @@ $pwFindBtn.click((e) => {
   e.preventDefault();
   window.location.href = '/login/pw'
 });
+
+$logoutBtn.click((e) => {
+  e.preventDefault();
+  const YouTuverse_token = $.cookie('YouTuverse_token')
+  $.removeCookie('YouTuverse_token', YouTuverse_token)
+  window.location.href = '/'
+})
 
 $pwFindCheckBtn.click((e) => {
   e.preventDefault();

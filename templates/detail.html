@@ -82,13 +82,14 @@
 <!-- 메인 페이지 -->
 <div class="inner">
     <h1>디테일 페이지</h1>
-    <div id="data" >
-        <!--        // id, name, photoURL, tags, likes-->
-        <div class="id">{{id}}</div>
-        <div class="name">{{name}}</div>
-        <div class="photoURL">{{photoURL}}</div>
-        <div class="tags">{{tags}}</div>
-        <div class="likes">{{likes}}</div>
+    <div id="data">
+        {#    # id, name, photoURL, likes, url, videoSrc#}
+        <div class="id">ID : {{ id }}</div>
+        <div class="name">유튜버 이름 : {{ name }}</div>
+        <div class="photoURL">유튜버 사진 : {{ photoURL }}</div>
+        <div class="likes">좋아요 수 :{{ likes }}</div>
+        <div class="tags">url : {{ url }}</div>
+        <div class="tags">비디오 주소 :{{ videoSrc }}</div>
     </div>
     <!--위로가기-->
     <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon">

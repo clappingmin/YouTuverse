@@ -5,7 +5,7 @@ app = Flask(__name__)
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.youtuverse
+db = client.dbsparta
 
 SECRET_KEY = 'YOUTUVERSE'
 
@@ -14,11 +14,6 @@ import jwt
 import datetime
 
 import hashlib
-
-# HTML 화면 보여주기
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 # router
 @app.route('/')
@@ -34,6 +29,18 @@ def home_page():
     except jwt.exceptions.DecodeError:
         return redirect(url_for('login_page', msg = '로그인 정보가 존재하지 않습니다.'))
 
+@app.route('/signup')
+def signup_page():
+    return render_template('signup.html')
+
+@app.route('/login')
+def login_page():
+    msg = request.args.get('msg')
+    return render_template('login.html', msg = msg)
+
+@app.route('/login/pw')
+def pw_find_page():
+    return render_template('login_pw.html')
 
 
 # APIs

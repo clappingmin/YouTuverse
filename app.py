@@ -27,7 +27,7 @@ def home_page():
     except jwt.ExpiredSignatureError:
         return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
     except jwt.exceptions.DecodeError:
-        return redirect(url_for('login_page', msg = '로그인 정보가 존재하지 않습니다.'))
+        return render_template('index.html', user = None)
 
 @app.route('/signup')
 def signup_page():

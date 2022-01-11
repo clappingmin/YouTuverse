@@ -16,7 +16,7 @@ function showYoutuber() {
 
 
                 let temp_html = `<div class="card" style="width: 18rem;" onclick="showwantYoutuber('${id}')">
-                                    <a href="#" class="btn btn-primary">
+                                    <a href="#" >
                                         <img class="card-img"
                                              src="${photoURL}"
                                              alt="Card image cap">
@@ -52,7 +52,7 @@ function showTop3Youtuber() {
 
                 let temp_html = `<img src="${icon_url}" alt="&{icon_alt}" class="rank">
                                 <div class="card" style="width: 18rem;" onclick="showwantYoutuber('${id}')">
-                                    <a href="#" class="btn btn-primary">
+                                    <a href="#" >
                                         <img class="card-img"
                                              src="${photoURL}"
                                              alt="유튜버 사진">
@@ -68,7 +68,7 @@ function showTop3Youtuber() {
 }
 
 function showwantYoutuber(id) {
-                window.location.href = `/api/youtuber/${id}`
+    window.location.href = `/api/youtuber/${id}`
 
     $.ajax({
         type: "GET",

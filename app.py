@@ -117,7 +117,7 @@ def show_all_youtuber():
     return jsonify({'youtubers': youtuber})
 
 # 유튜버 상세페이지로 데이터 전달
-@app.route('/api/youtuber/<id>')
+@app.route('/youtuber/<id>')
 def show_want_youtuber(id):
     # id, name, photoURL, likes, url, videoSrc
     youtuber = db.youtuber.find_one({'id':id})
@@ -126,8 +126,6 @@ def show_want_youtuber(id):
     likes = youtuber['likes']
     url = youtuber['url']
     videoSrc = youtuber['videoSrc']
-
-
 
     return render_template('detail.html', id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
 

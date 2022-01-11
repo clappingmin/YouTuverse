@@ -1,0 +1,196 @@
+body {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+    background-color: rgb(24 24 24);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* HEADER */
+header {
+    position: relative;
+}
+
+header .inner {
+    width: 100%;
+    height: 80px;
+    margin: 0 auto;
+    background-color: rgb(32 32 32);
+    border: rgb(56 55 56);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+}
+
+header .inner a.title {
+    margin: auto 0;
+    z-index: 999999;
+
+}
+
+
+header .inner a .title {
+    display: block;
+    height: 100%;
+    margin: auto 30px;
+    min-width: 100px;
+    max-width: 200px;
+    color: white;
+
+
+}
+
+header .inner ul.menu {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+header .inner ul.menu li {
+    display: block;
+    margin: auto;
+}
+
+header .inner ul.menu li a {
+    padding: 11px 16px;
+    display: block;
+    margin: auto 10px;
+    color: #fff;
+}
+
+header .inner ul.menu li a:hover {
+    color: #bbb;
+}
+
+header .search {
+    height: 34px;
+    position: relative;
+    margin: auto 50px;
+}
+
+header .search input {
+    min-width: 200px;
+    max-width: 400px;
+    width: 400px;
+    height: 34px;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgb(18 18 18);
+    color: #fff;
+}
+
+header .search .material-icons {
+    height: 24px;
+    position: absolute;
+    padding: 0 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+/* 메인 페이지 */
+.inner {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.inner .top3-cards h3 {
+    background-color: rgb(24 24 24);
+    font-size: 35px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.inner .cards {
+    background-color: rgb(32 32 32);
+    border-radius: 10px;
+    width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.inner .cards .rank {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}
+
+.inner .cards .card {
+    width: 300px;
+    height: 200px;
+    background-color: royalblue;
+    border: 2pt groove #ffc6b3;
+    border-radius: 10px;
+    position: relative;
+    margin: 25px;
+}
+
+.inner .cards .card a {
+    width: 100%;
+    background-color: yellow;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    box-sizing: content-box;
+    justify-content: center;
+
+
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+}
+
+.inner .cards .card a .card-img {
+    width: 120px;
+    height: 120px;
+    margin: auto 8px;
+}
+
+.inner .cards .card a .card-title {
+    background-color: pink;
+    display: block;
+    margin: auto 0;
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
+
+
+}
+
+.inner .all-cards h3 {
+    background-color: rgb(24 24 24);
+    font-size: 35px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.inner #up-btn {
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    z-index: 999;
+    bottom: 20px;
+    right: 20px;
+    -webkit-box-shadow: 0 1px 2px 0 #777;
+    box-shadow: 0 1px 2px 0 #777;
+    border-radius: 100px;
+    filter: invert(100%);
+}
+

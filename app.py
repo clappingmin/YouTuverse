@@ -5,7 +5,7 @@ app = Flask(__name__)
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.dbsparta
+db = client.youtuverse
 
 SECRET_KEY = 'YOUTUVERSE'
 
@@ -14,6 +14,11 @@ import jwt
 import datetime
 
 import hashlib
+
+# HTML 화면 보여주기
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 # router
 @app.route('/')
@@ -29,18 +34,7 @@ def home_page():
     except jwt.exceptions.DecodeError:
         return redirect(url_for('login_page', msg = '로그인 정보가 존재하지 않습니다.'))
 
-@app.route('/signup')
-def signup_page():
-    return render_template('signup.html')
 
-@app.route('/login')
-def login_page():
-    msg = request.args.get('msg')
-    return render_template('login.html', msg = msg)
-
-@app.route('/login/pw')
-def pw_find_page():
-    return render_template('login_pw.html')
 
 # APIs
 # 회원가입
@@ -101,6 +95,19 @@ def find_password():
     db.users.update_one({ 'user_id': user_id }, { '$set': { 'password': hashed_password } })
 
     return jsonify({ 'msg': '비밀번호를 재설정하였습니다.' })
+
+# 유튜버 좋아요 상위 3명 목록 가져오기
+@app.route('/api/youtuber/top', methods=['GET'])
+def show_top3_youtuber():
+    youtuber = list(db.youtuber.find({}, {'_id': False}).limit(3).sort("likes", -1))
+
+    return jsonify({'youtubers': youtuber})
+
+# 유튜버 전체 목록 가져오기
+@app.route('/api/youtuber/all', methods=['GET'])
+def show_all_youtuber():
+    youtuber = list(db.youtuber.find({}, {'_id': False}).sort("name"))
+    return jsonify({'youtubers': youtuber})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

@@ -1,5 +1,5 @@
 function showYoutuber() {
-        $.ajax({
+    $.ajax({
         type: 'GET',
         url: '/api/youtuber/all?sample_give=샘플데이터',
         data: {},
@@ -14,7 +14,8 @@ function showYoutuber() {
                 let tags = youtubers[i]['tags']
                 let likes = youtubers[i]['likes']
 
-                let temp_html = `<div class="card" style="width: 18rem;">
+
+                let temp_html = `<div class="card" style="width: 18rem;" onclick="showwantYoutuber('${id}')">
                                     <a href="#" class="btn btn-primary">
                                         <img class="card-img"
                                              src="${photoURL}"
@@ -31,7 +32,7 @@ function showYoutuber() {
 }
 
 function showTop3Youtuber() {
-        $.ajax({
+    $.ajax({
         type: 'GET',
         url: '/api/youtuber/top?sample_give=샘플데이터',
         data: {},
@@ -46,11 +47,11 @@ function showTop3Youtuber() {
                 let tags = youtubers[i]['tags']
                 let likes = youtubers[i]['likes']
 
-                let icon_url = "../static/images/rank-icon-"+(i+1)+".png"
-                let icon_alt = "rann"+(i+1)
+                let icon_url = "../static/images/rank-icon-" + (i + 1) + ".png"
+                let icon_alt = "rann" + (i + 1)
 
                 let temp_html = `<img src="${icon_url}" alt="&{icon_alt}" class="rank">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card" style="width: 18rem;" onclick="showwantYoutuber('${id}')">
                                     <a href="#" class="btn btn-primary">
                                         <img class="card-img"
                                              src="${photoURL}"
@@ -64,4 +65,21 @@ function showTop3Youtuber() {
             }
         }
     });
+}
+
+function showwantYoutuber(id) {
+                window.location.href = `/api/youtuber/${id}`
+
+    $.ajax({
+        type: "GET",
+        url: `/api/youtuber/${id}`,
+        data: {},
+        error: function (xhr, status, error) {
+            alert("에러 발생!");
+        },
+        success: function (response) {
+
+        }
+    })
+
 }

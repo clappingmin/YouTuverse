@@ -4,7 +4,6 @@ body {
     font-weight: bold;
     line-height: 1.4;
     background-color: rgb(24 24 24);
-    position: relative;
 }
 
 a {
@@ -24,16 +23,14 @@ header .inner {
     border: rgb(56 55 56);
     position: fixed;
     display: flex;
+    align-items: center;
     z-index: 999;
-
 }
 
 header .inner a.title {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: 20px;
-    z-index: 99999;
+    margin: auto 0;
+    z-index: 999999;
+
 }
 
 
@@ -44,6 +41,8 @@ header .inner a .title {
     min-width: 100px;
     max-width: 200px;
     color: white;
+
+
 }
 
 header .inner ul.menu {
@@ -52,6 +51,7 @@ header .inner ul.menu {
     right: 0;
     top: 0;
     bottom: 0;
+    margin: auto;
 }
 
 header .inner ul.menu li {
@@ -102,18 +102,10 @@ header .search .material-icons {
 .inner {
     width: 1200px;
     margin: 0 auto;
-    padding: 80px 0 0;
-}
-
-
-.inner .top3-cards {
-    /*position: absolute;*/
-    /*    top: 80px;*/
 }
 
 .inner .top3-cards h3 {
-    /*background-color: rgb(24 24 24);*/
-    /*background-color: yellow;*/
+    background-color: rgb(24 24 24);
     font-size: 35px;
     padding: 20px;
     font-weight: bold;
@@ -140,24 +132,16 @@ header .search .material-icons {
 .inner .cards .card {
     width: 300px;
     height: 200px;
-    background-color: rgb(43 43 43);
+    background-color: royalblue;
+    border: 2pt groove #ffc6b3;
     border-radius: 10px;
     position: relative;
     margin: 25px;
-    transition: transform .8s,
-    background-color 0.6s;
-}
-
-.inner .cards .card:hover {
-    background-color: rgb(60 63 64);
-    filter: brightness(50%);
-    transform: scale(1.2);
-
-
 }
 
 .inner .cards .card a {
     width: 100%;
+    background-color: yellow;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -178,8 +162,7 @@ header .search .material-icons {
 }
 
 .inner .cards .card a .card-title {
-    color: #fff;
-    text-align: center;
+    background-color: pink;
     display: block;
     margin: auto 0;
     font-size: 20px;
@@ -210,4 +193,3 @@ header .search .material-icons {
     border-radius: 100px;
     filter: invert(100%);
 }
-

@@ -34,7 +34,7 @@ def home_page():
     except jwt.ExpiredSignatureError:
         return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
     except jwt.exceptions.DecodeError:
-        return render_template('index.html', user = None)
+        return redirect(url_for('login_page', msg = '로그인 정보가 없습니다.'))
 
 @app.route('/signup')
 def signup_page():
@@ -52,7 +52,16 @@ def pw_find_page():
 # URL 저장
 @app.route('/urlsave')
 def search():
-    return render_template('urlsave.html')
+    token = request.cookies.get('YouTuverse_token')
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms = ['HS256'])
+        user = db.users.find_one({'user_id': payload['user_id']})
+
+        return render_template('urlsave.html', user = user)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for('login_page', msg = '로그인 정보가 없습니다.'))
 
 # 유튜버 상세페이지로 데이터 전달
 @app.route('/youtuber/<name>')

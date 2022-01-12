@@ -21,7 +21,6 @@ def home_page():
     token = request.cookies.get('YouTuverse_token')
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms = ['HS256'])
-        print(payload)
         user = db.users.find_one({'user_id': payload['user_id']})
         youtubers = list(db.youtuber.find({}, {'_id': False}).sort("name"))
         top3youtubers = list(db.youtuber.find({}, {'_id': False}).limit(3).sort("likes", -1))
@@ -48,6 +47,7 @@ def pw_find_page():
 # 유튜버 상세페이지로 데이터 전달
 @app.route('/youtuber/<id>')
 def show_want_youtuber(id):
+    token = request.cookies.get('YouTuverse_token')
     # id, name, photoURL, likes, url, videoSrc
     youtuber = db.youtuber.find_one({'id': id})
     name = youtuber['name']
@@ -55,9 +55,14 @@ def show_want_youtuber(id):
     likes = youtuber['likes']
     url = youtuber['url']
     videoSrc = youtuber['videoSrc']
-
-    return render_template('detail.html', id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
-
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        user = db.users.find_one({'user_id': payload['user_id']})
+        return render_template('detail.html', user = user, id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
+    except jwt.exceptions.DecodeError:
+        return render_template('detail.html', user = None, id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
 
 # APIs
 # 회원가입

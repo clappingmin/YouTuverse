@@ -116,6 +116,10 @@ def find_password():
 # 유튜버 상세페이지로 데이터 전달
 @app.route('/youtuber/<id>')
 def show_want_youtuber(id):
+    token = request.cookies.get('YouTuverse_token')
+    payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+    print(payload)
+    user = db.users.find_one({'user_id': payload['user_id']})
     # id, name, photoURL, likes, url, videoSrc
     youtuber = db.youtuber.find_one({'id': id})
     name = youtuber['name']
@@ -124,7 +128,7 @@ def show_want_youtuber(id):
     url = youtuber['url']
     videoSrc = youtuber['videoSrc']
 
-    return render_template('detail.html', id=id, name=name, photoURL=photoURL, likes=likes, url=url, videoSrc=videoSrc)
+    return render_template('detail.html', user = user, id=id, name=name, photoURL=photoURL, likes=likes, url=url, videoSrc=videoSrc)
 
 
 if __name__ == '__main__':

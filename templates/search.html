@@ -102,30 +102,12 @@
 <!-- 메인 페이지 -->
 <div class="inner">
     <!--위로가기-->
-    <div class="top3-cards">
-        <h3>좋아요 top3. </h3>
-        <div class="cards" id="top3-cards">
-            {% for youtuber in top3youtubers %}
-            {% set photo = youtuber['photoURL'] %}
-            {% set name = youtuber['name'] %}
-            {% set numofSub = youtuber['numofSub'] %}
-            {% set likes = youtuber['likes'] %}
-            <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
-                <a href="#">
-                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
-                    <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
-                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
-                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+    검색 : {{keyword}}
+
     <div class="all-cards">
-        <h3>전체 유튜버</h3>
+        <h3>검색 결과</h3>
+
+
         <div class="cards" id="all-cards">
             {% for youtuber in youtubers %}
             {% set photo = youtuber['photoURL'] %}
@@ -136,7 +118,7 @@
                 <a href="#">
                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
                     <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
+                        <div class="card-title">{{name}}</div>
                         <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
                         <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
                     </div>

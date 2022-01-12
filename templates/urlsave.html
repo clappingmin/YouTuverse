@@ -88,36 +88,36 @@
 <body>
 <!--Header-->
 <header>
-  <div class="inner">
-    <a href="/" id="logo-title">
-      <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
-      <h1 id = "title">YouTuverse</h1>
-    </a>
-    <ul class="menu">
-      <li>
-        <div class="search">
-          <input type="text" placeholder="검색할 유튜버 입력하세요.">
-          <div class="material-icons">search</div>
-        </div>
-      </li>
-      <li>
-        <a href="urlsave">유튜버 추가</a>
-      </li>
-      {% if user %}
-      <span>안녕하세요 {{ user['nickname'] }}님!</span>
-      <li id="logoutBtn">
-        로그아웃
-      </li>
-      {% else %}
-      <li>
-        <a href="/login">로그인</a>
-      </li>
-      <li>
-        <a href="/signup">회원가입</a>
-      </li>
-      {% endif %}
-    </ul>
-  </div>
+    <div class="containner">
+        <a href="/" id="logo-title">
+            <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
+            <h1 id="title">YouTuverse</h1>
+        </a>
+        <ul class="menu">
+            <li>
+                <div class="search">
+                    <input type="text" placeholder="검색할 유튜버 입력하세요.">
+                    <div class="material-icons">search</div>
+                </div>
+            </li>
+            <li>
+                <a href="/urlsave">유튜버 추가</a>
+            </li>
+            {% if user %}
+            <span>안녕하세요 {{ user['nickname'] }}님!</span>
+            <li id="logoutBtn">
+                로그아웃
+            </li>
+            {% else %}
+            <li>
+                <a href="/login">로그인</a>
+            </li>
+            <li>
+                <a href="/signup">회원가입</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
 </header>
 
 <div class="wrap">

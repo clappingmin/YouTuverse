@@ -67,8 +67,7 @@ a {
 }
 
 .inner .cards .card:hover {
-    background-color: #fff;
-    color: rgb(234 51 35);
+    background-color: #000;
     filter: brightness(70%);
     transform: scale(1.2);
     z-index: 999;
@@ -99,7 +98,7 @@ a {
 }
 
 .inner .cards .card a .card-title {
-    color: rgb(185, 185, 185);
+    color: #fff;
     max-height: 60px;
     text-align: center;
     display: block;
@@ -111,7 +110,7 @@ a {
 }
 
 .inner .cards .card a .card-info {
-    color: rgb(185, 185, 185);
+    color: #fff;
     text-align: left;
     display: block;
     margin: auto;

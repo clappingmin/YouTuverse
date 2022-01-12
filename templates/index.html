@@ -40,8 +40,6 @@
 </head>
 <script>
     $(document).ready(function () {
-        showYoutuber()
-        showTop3Youtuber()
 
         $(window).scroll(function () {
             // top button controll
@@ -101,11 +99,34 @@
     <div class="top3-cards">
         <h3>좋아요 top3. </h3>
         <div class="cards" id="top3-cards">
+            {% for youtuber in top3youtubers %}
+                {% set photo = youtuber['photoURL'] %}
+                {% set name = youtuber['name'] %}
+                {% set id = youtuber['id'] %}
+                <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
+                <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
+                    <a href="#">
+                        <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+                        <div class="card-title">{{ name }}</div>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
     </div>
     <div class="all-cards">
         <h3>전체 유튜버</h3>
         <div class="cards" id="all-cards">
+            {% for youtuber in youtubers %}
+                {% set photo = youtuber['photoURL'] %}
+                {% set name = youtuber['name'] %}
+                {% set id = youtuber['id'] %}
+                <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
+                    <a href="#">
+                        <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+                        <div class="card-title">{{ name }}</div>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
     </div>
     <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon">

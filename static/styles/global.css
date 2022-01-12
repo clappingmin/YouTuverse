@@ -6,6 +6,8 @@ body {
     font-weight: bold;
     line-height: 1.4;
     background-color: rgb(24, 24, 24);
+    height: 100vh;
+
 }
 
 a {

@@ -17,9 +17,7 @@ a {
 
 /* 메인 페이지 */
 .inner {
-    height: 100%;
-    width: 1200px;
-    margin: 0 auto;
+    width: 1200px; min-height: 100vh; padding-bottom: 64px; margin: 0 auto;
 }
 
 

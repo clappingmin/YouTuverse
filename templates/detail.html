@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
     <!-- CSS 파일 가져오기    -->
     <!--    <link rel="stylesheet" href="../static/styles/main.css">-->
     <link rel="stylesheet" href="../static/styles/global.css">
@@ -69,15 +76,20 @@
             <li>
                 <a href="#">유튜버 추가</a>
             </li>
-            <li>
-                <a href="#">로그인</a>
-            </li>
-            <li>
-                <a href="#">회원가입</a>
-            </li>
-
+            {% if user %}
+                <span>안녕하세요 {{ user['nickname'] }}님!</span>
+                <li id="logoutBtn">
+                    로그아웃
+                </li>
+            {% else %}
+                <li>
+                    <a href="/login">로그인</a>
+                </li>
+                <li>
+                    <a href="/signup">회원가입</a>
+                </li>
+            {% endif %}
         </ul>
-
     </div>
 </header>
 <!-- 메인 페이지 -->
@@ -98,6 +110,6 @@
 
 </div>
 
-
+<script src="../static/js/login.js"></script>
 </body>
 </html>

@@ -192,6 +192,17 @@ def collect_youtuber_info():
     db.youtuber.insert_one(doc)
 
     return jsonify({'result': 'success', 'msg': '업로드 완료!'})
+    
+# 검색 결과 페이지로 이동
+@app.route('/search/<keyword>')
+def search(keyword):
+    # youtubers = db.youtuber.find_one({'name': keyword}, {'_id': False})
+    # youtubers = list(db.youtuber.find({}, {'_id': False}))
+    youtubers = list(db.youtuber.find({'name':keyword}, {'_id': False}).sort("likes", -1))
+    # youtubers = list(db.youtuber.find({'title': {'$regex': keyword}}, {'_id': False}).sort('like', -1))
+    print(len(youtubers))
+    print(youtubers)
+    return render_template('search.html', keyword=keyword, youtubers=youtubers)
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

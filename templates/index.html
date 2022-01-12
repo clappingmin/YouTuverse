@@ -78,17 +78,17 @@
                 <a href="#">유튜버 추가</a>
             </li>
             {% if user %}
-                <span>안녕하세요 {{ user['nickname'] }}님!</span>
-               <li id="logoutBtn">
-                    로그아웃
-                </li>
+            <span>안녕하세요 {{ user['nickname'] }}님!</span>
+            <li id="logoutBtn">
+                로그아웃
+            </li>
             {% else %}
-                <li>
-                    <a href="/login">로그인</a>
-                </li>
-                <li>
-                    <a href="/signup">회원가입</a>
-                </li>
+            <li>
+                <a href="/login">로그인</a>
+            </li>
+            <li>
+                <a href="/signup">회원가입</a>
+            </li>
             {% endif %}
         </ul>
     </div>
@@ -100,16 +100,22 @@
         <h3>좋아요 top3. </h3>
         <div class="cards" id="top3-cards">
             {% for youtuber in top3youtubers %}
-                {% set photo = youtuber['photoURL'] %}
-                {% set name = youtuber['name'] %}
-                {% set id = youtuber['id'] %}
-                <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
-                <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
-                    <a href="#">
-                        <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+            {% set photo = youtuber['photoURL'] %}
+            {% set name = youtuber['name'] %}
+            {% set id = youtuber['id'] %}
+            {% set numofSub = youtuber['numofSub'] %}
+            {% set likes = youtuber['likes'] %}
+            <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
+            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
+                <a href="#">
+                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+                    <div class="youtuber-info">
                         <div class="card-title">{{ name }}</div>
-                    </a>
-                </div>
+                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
+                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
+                    </div>
+                </a>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -117,15 +123,21 @@
         <h3>전체 유튜버</h3>
         <div class="cards" id="all-cards">
             {% for youtuber in youtubers %}
-                {% set photo = youtuber['photoURL'] %}
-                {% set name = youtuber['name'] %}
-                {% set id = youtuber['id'] %}
-                <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
-                    <a href="#">
-                        <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+            {% set photo = youtuber['photoURL'] %}
+            {% set name = youtuber['name'] %}
+            {% set id = youtuber['id'] %}
+            {% set numofSub = youtuber['numofSub'] %}
+            {% set likes = youtuber['likes'] %}
+            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
+                <a href="#">
+                   <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+                    <div class="youtuber-info">
                         <div class="card-title">{{ name }}</div>
-                    </a>
-                </div>
+                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
+                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
+                    </div>
+                </a>
+            </div>
             {% endfor %}
         </div>
     </div>

@@ -72,12 +72,12 @@ header .inner ul.menu {
 
 header .inner ul.menu span {
     display: block;
-    margin: auto 0 auto 0;
+    margin: auto 10px auto 10px;
 }
 
 header .inner ul.menu li {
     display: block;
-    margin: auto;
+    margin: auto 10px;
 }
 
 header .inner ul.menu li a {

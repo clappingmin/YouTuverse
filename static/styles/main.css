@@ -57,7 +57,8 @@ a {
 .inner .cards .card {
     width: 300px;
     height: 200px;
-    background-color: rgb(60 63 64);
+    background-color: rgb(40 40 40);
+    border: #000;
     border-radius: 10px;
     position: relative;
     margin: 25px;
@@ -66,7 +67,8 @@ a {
 }
 
 .inner .cards .card:hover {
-    background-color: rgb(60 63 64);
+    background-color: #fff;
+    color: rgb(234 51 35);
     filter: brightness(70%);
     transform: scale(1.2);
     z-index: 999;
@@ -77,35 +79,55 @@ a {
     position: absolute;
     top: 0;
     bottom: 0;
-    margin: auto;
     display: flex;
     box-sizing: border-box;
     justify-content: center;
-
-
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
 }
 
 .inner .cards .card a .card-img {
-    width: 120px;
-    height: 120px;
-    margin: auto 8px;
+    width: 60%;
+    height: 100%;
+    margin: auto 0;
+    border-radius: 10px 0 0 10px;
+}
+
+.inner .cards .card a .youtuber-info {
+    width: 40%;
+    margin: auto 0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .inner .cards .card a .card-title {
-    color: #fff;
+    color: rgb(185, 185, 185);
+    max-height: 60px;
     text-align: center;
     display: block;
-    margin: auto 0;
     font-size: 20px;
     font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 120px;
-
-
+    width: 100%;
 }
+
+.inner .cards .card a .card-info {
+    color: rgb(185, 185, 185);
+    text-align: left;
+    display: block;
+    margin: auto;
+    font-size: 18px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space:nowrap
+}
+
+.inner .cards .card a .youtuber-info span {
+    font-size: 10px;
+    color: rgb(185, 185, 185);
+}
+
 
 .inner .all-cards h3 {
     background-color: rgb(24 24 24);

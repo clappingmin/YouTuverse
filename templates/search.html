@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS 초기화   -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <!-- 머티리얼 아이콘을 위한 CDN 설치   -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../static/styles/global.css">
+    <link rel="stylesheet" href="../static/styles/search.css">
+
+    <!-- 구글폰트 -->
+
+    <title>YouTuverse | Home</title>
+
+    <!-- Open Graphs -->
+    <meta property="og:title" content="YouTuverse | 검색">
+    <meta property="og:title" content="유익한 유튜버 정보를 공유하고 나에게 맞는 유튜버 정보를 얻어갈 수 있는 공간!! YouTuverse 입니다!!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:imgae" content="">
+</head>
+<script>
+  function upload_youtube() {
+
+      let url = $('#url_upload').val()
+          
+      if (url.indexOf('youtube') === -1) {
+          alert('유튜브 영상만 링크만 가능합니다.');
+          $('#url_upload').val('');
+          return false;
+      }
+      
+      $.ajax({
+          type: "POST",
+          url: `/api/search`,
+          data: {
+              url_give: url
+          },
+          success: function (response) {
+              if (response["result"] == "success") {
+                  alert(response["msg"]);
+                  window.location.reload();
+              }
+          }
+      });
+  }
+
+    $(document).ready(function () {
+
+        $(window).scroll(function () {
+            // top button controll
+            if ($(this).scrollTop() > 100) {
+                $('#up-btn').fadeIn();
+            } else {
+                $('#up-btn').fadeOut();
+            }
+        });
+
+        // 위로 올라가기 버튼
+        $("#up-btn").click(function () {
+            $('html, body').animate({scrollTop: 0}, '300');
+        });
+
+    });
+
+</script>
+
+</head>
+<body>
+<!-- 메인 페이지 -->
+<div class="wrap">
+  <div class="banner">
+      <div class="inner">
+          <a href="/" class="title">
+              <div class="title">YouTuverse</div>
+          </a>
+          <ul class="menu">
+              <li>
+                  <div class="search">
+                      <input type="text" placeholder="검색할 유튜버 입력하세요.">
+                      <div class="material-icons">search</div>
+                  </div>
+              </li>
+              <li>
+                  <a href="#">유튜버 추가</a>
+              </li>
+              {% if user %}
+                  <span>안녕하세요 {{ user['nickname'] }}님!</span>
+                  <li>
+                      <a href="/login">로그아웃</a>
+                  </li>
+              {% else %}
+                  <li>
+                      <a href="/login">로그인</a>
+                  </li>
+                  <li>
+                      <a href="/signup">회원가입</a>
+                  </li>
+              {% endif %}
+          </ul>
+      </div>
+  </div>
+  <div class="container">
+      <div class="url_input_box input-group mb-3">
+          <input class="input" type="text" placeholder="URL 입력 후 업로드 완료! 창을 기다려주세요" id="url_upload"
+                 id="basic-url" aria-describedby="basic-addon3">
+          <button id="button" onclick="upload_youtube()" class="btn btn-light">업로드</button>
+      </div>
+  </div>
+</div>
+</div>
+
+<script src="../static/js/load.js"></script>
+<script src="../static/js/login.js"></script>
+</body>
+</html>

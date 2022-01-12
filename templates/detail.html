@@ -36,6 +36,21 @@
 
 
     <script>
+        function like_youtube() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/like',
+                data: {
+                    'name_give': "{{ keyword }}"
+                },
+                success: function (response) {
+                    console.log(response)
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+        
         $(document).ready(function () {
             $(window).scroll(function () {
                 // top button controll
@@ -89,23 +104,43 @@
         </ul>
     </div>
 </header>
-<!-- 메인 페이지 -->
-<div class="inner">
-    <h1>디테일 페이지</h1>
-    <div id="data">
-<!--        {# # id, name, photoURL, likes, url, videoSrc#}-->
-        <div class="id">ID : {{ id }}</div>
-        <div class="name">유튜버 이름 : {{ name }}</div>
-        <div class="photoURL">유튜버 사진 : {{ photoURL }}</div>
-        <div class="likes">좋아요 수 :{{ likes }}</div>
-        <div class="tags">url : {{ url }}</div>
-        <div class="tags">비디오 주소 :{{ videoSrc }}</div>
-
-    </div>
-    <!--위로가기-->
-    <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon">
-
+<div class="wrap">
+  <div class="container">
+      <div class="d-flex justify-content-between align-items-end">
+          {% for youtuber in youtubers %}
+              {% if keyword == youtuber.name %}
+                  <div class="d-flex justify-content-between align-items-end">
+                      <div class="media">
+                          <div class="media-left">
+                              <figure>
+                                  <img class="image" src="{{ youtuber.photoURL }}" alt="Placeholder image"/>
+                              </figure>
+                          </div>
+                          <div class="media-content">
+                              <p class="font1">{{ youtuber.name }}</p>
+                              <p class="font2">{{ youtuber.desc }}</p>
+                              <p class="font2">{{ youtuber.subscribers }}</p>
+                              <a href="{{ youtuber.thumbnail_video }}">최근영상 보러가기</a>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <button id="button" onclick="like_youtube()" type="button" class="btn btn-light">
+                          좋아요:{{ youtuber.like }}명
+                      </button>
+                  </div>
+              {% endif %}
+          {% endfor %}
+      </div>
+  </div>
 </div>
+<!-- 메인 페이지 -->
+<!-- <div class="inner"> -->
+    <!-- <h1>디테일 페이지</h1> -->
+    <!-- <div id="data"> -->
+    <!--위로가기-->
+    <!-- <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon"> -->
+<!-- </div> -->
 
 <script src="../static/js/login.js"></script>
 </body>

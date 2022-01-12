@@ -70,12 +70,6 @@ def show_want_youtuber(name):
     except jwt.exceptions.DecodeError:
         return render_template('detail.html', user = None, youtuber=youtuber)
 
-# 상세페이지
-# @app.route('/detail/<keyword>')
-# def detail(keyword):
-#     youtubers = list(db.youtube.find({}, {'_id': False}))
-#     return render_template('detail.html', youtubers=youtubers, keyword=keyword)
-
 # APIs
 # 회원가입
 @app.route('/api/user/new', methods=['POST'])
@@ -153,14 +147,14 @@ def like_youtube():
 
 # 유튜버 크롤링
 @app.route('/api/search', methods=['POST'])
-def signUp():
+def collect_youtuber_info():
 
     # 드라이버를 실행합니다.
     url = request.form['url_give']
     # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     # data = requests.get(url, headers=headers)
 
-    s = Service('C:/chromedriver.exe')
+    s = Service('./chromedriver.exe')
     driver = webdriver.Chrome(service=s)
     driver.get(url)  # 드라이버에 해당 url의 웹페이지를 띄웁니다.
     sleep(1)  # 페이지가 로딩되는 동안 5초 간 기다립니다.

@@ -60,20 +60,15 @@ def show_want_youtuber(name):
     token = request.cookies.get('YouTuverse_token')
     # name, photoURL, likes, url, videoSrc
     youtuber = db.youtuber.find_one({'name': name})
-    name = youtuber['name']
-    photoURL = youtuber['photoURL']
-    likes = youtuber['likes']
-    url = youtuber['url']
-    videoSrc = youtuber['videoSrc']
 
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
         user = db.users.find_one({'user_id': payload['user_id']})
-        return render_template('detail.html', user = user, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
+        return render_template('detail.html', user = user, youtuber=youtuber)
     except jwt.ExpiredSignatureError:
         return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
     except jwt.exceptions.DecodeError:
-        return render_template('detail.html', user = None, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
+        return render_template('detail.html', user = None, youtuber=youtuber)
 
 # 상세페이지
 # @app.route('/detail/<keyword>')
@@ -150,10 +145,10 @@ def find_password():
 @app.route('/api/like', methods=['POST'])
 def like_youtube():
     name_receive = request.form['name_give']
-    a_like = db.youtube.find_one({'name': name_receive})
-    current_like = a_like['like']
+    a_like = db.youtuber.find_one({'name': name_receive})
+    current_like = a_like['likes']
     new_like = current_like + 1
-    db.youtube.update_one({'name': name_receive}, {'$set': {'like': new_like}})
+    db.youtuber.update_one({'name': name_receive}, {'$set': {'likes': new_like}})
     return jsonify({'msg': '좋아요!'})
 
 # 유튜버 크롤링
@@ -183,7 +178,7 @@ def signUp():
     thumbnail_video = 'https://www.youtube.com' + soup.select_one('div#items a#thumbnail', href=True)['href']
 
     doc = {
-        'like': 0,
+        'likes': 0,
         'name': name,
         'desc': desc,
         'photoURL': photoURL,
@@ -191,7 +186,7 @@ def signUp():
         'subscribers': subscribers,
     }
 
-    db.youtube.insert_one(doc)
+    db.youtuber.insert_one(doc)
 
     return jsonify({'result': 'success', 'msg': '업로드 완료!'})
 

@@ -1,45 +1,162 @@
-from flask import Flask, render_template, jsonify, request
-from bs4 import BeautifulSoup
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+
+app = Flask(__name__)
+
 from pymongo import MongoClient
 
+client = MongoClient('localhost', 27017)
+db = client.dbsparta
+
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from time import sleep
 
-app = Flask(__name__)
+SECRET_KEY = 'YOUTUVERSE'
 
-client = MongoClient('52.78.133.86', 27017, username="test", password="test")
-db = client.YouTubeList
+import jwt
 
-# 홈화면
+import datetime
+
+import hashlib
+
+# router
 @app.route('/')
-def home():
-    youtubers = list(db.youtube.find({}, {'_id': False}))
-    return render_template('prac.html', youtubers=youtubers)
+def home_page():
+    token = request.cookies.get('YouTuverse_token')
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms = ['HS256'])
+        user = db.users.find_one({'user_id': payload['user_id']})
+        youtubers = list(db.youtuber.find({}, {'_id': False}).sort("name"))
+        top3youtubers = list(db.youtuber.find({}, {'_id': False}).limit(3).sort("likes", -1))
 
+        return render_template('index.html', user = user, top3youtubers = top3youtubers, youtubers=youtubers)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
+    except jwt.exceptions.DecodeError:
+        return render_template('index.html', user = None)
 
-# 상세페이지
-@app.route('/detail/<keyword>')
-def detail(keyword):
-    youtubers = list(db.youtube.find({}, {'_id': False}))
-    return render_template('detail.html', youtubers=youtubers, keyword=keyword)
+@app.route('/signup')
+def signup_page():
+    return render_template('signup.html')
 
-# 좋아요 버튼 누르면 1개 증가하는 API
-@app.route('/api/like', methods=['POST'])
-def like_youtube():
-    name_receive = request.form['name_give']
-    a_like = db.youtube.find_one({'name': name_receive})
-    current_like = a_like['likes']
-    new_like = current_like + 1
-    db.youtube.update_one({'name': name_receive}, {'$set': {'likes': new_like}})
-    return jsonify({'msg': '좋아요!'})
+@app.route('/login')
+def login_page():
+    msg = request.args.get('msg')
+    return render_template('login.html', msg = msg)
+
+@app.route('/login/pw')
+def pw_find_page():
+    return render_template('login_pw.html')
 
 # URL 저장
 @app.route('/search')
 def search():
     return render_template('search.html')
 
+# 유튜버 상세페이지로 데이터 전달
+@app.route('/youtuber/<name>')
+def show_want_youtuber(name):
+    token = request.cookies.get('YouTuverse_token')
+    # name, photoURL, likes, url, videoSrc
+    youtuber = db.youtuber.find_one({'name': name})
+    name = youtuber['name']
+    photoURL = youtuber['photoURL']
+    likes = youtuber['likes']
+    url = youtuber['url']
+    videoSrc = youtuber['videoSrc']
 
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        user = db.users.find_one({'user_id': payload['user_id']})
+        return render_template('detail.html', user = user, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
+    except jwt.exceptions.DecodeError:
+        return render_template('detail.html', user = None, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
+
+# 상세페이지
+# @app.route('/detail/<keyword>')
+# def detail(keyword):
+#     youtubers = list(db.youtube.find({}, {'_id': False}))
+#     return render_template('detail.html', youtubers=youtubers, keyword=keyword)
+
+# APIs
+# 회원가입
+@app.route('/api/user/new', methods=['POST'])
+def signup():
+    user_id = request.form['ID']
+    nickname = request.form['NICKNAME']
+    pw = request.form['PW']
+
+    is_exist = db.users.find_one({ 'user_id': user_id })
+    if is_exist:
+        return jsonify({ 'msg': '이미 존재하는 아이디입니다.' })
+
+    hashed_pw = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+
+    doc = {
+        'user_id': user_id,
+        'nickname': nickname,
+        'password': hashed_pw,
+    }
+
+    db.users.insert_one(doc)
+
+    return jsonify({ 'result': 'success', 'msg': '회원가입에 성공하였습니다.' })
+
+# 로그인
+@app.route('/api/user', methods=['POST'])
+def login():
+    user_id = request.form['ID']
+    password = request.form['PW']
+
+    user = db.users.find_one({ 'user_id': user_id }, { '_id': False })
+    if user is None:
+        return jsonify({ 'msg': '존재하지 않는 ID입니다.' })
+
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    if hashed_password != user['password']:
+        return jsonify({ 'msg': '비밀번호가 일치하지 않습니다.' })
+
+    payload = {
+        'user_id': user_id,
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+    return jsonify({ 'token': token })
+
+# 로그아웃
+@app.route('/api/user/logout', methods=['GET'])
+def logout():
+    return jsonify({ 'msg': 'success' })
+
+# 비밀번호 찾기
+@app.route('/api/user/password', methods=['POST'])
+def find_password():
+    user_id = request.form['user_id']
+    new_password = request.form['password']
+
+    user = db.users.find_one({ 'user_id': user_id }, { '_id': False })
+    if user is None:
+        return jsonify({ 'msg': '존재하지 않는 ID입니다.' })
+
+    hashed_password = hashlib.sha256(new_password.encode('utf-8')).hexdigest()
+    db.users.update_one({ 'user_id': user_id }, { '$set': { 'password': hashed_password } })
+
+    return jsonify({ 'msg': '비밀번호를 재설정하였습니다.' })
+
+# 좋아요 버튼 누르면 1개 증가하는 API
+@app.route('/api/like', methods=['POST'])
+def like_youtube():
+    name_receive = request.form['name_give']
+    a_like = db.youtube.find_one({'name': name_receive})
+    current_like = a_like['like']
+    new_like = current_like + 1
+    db.youtube.update_one({'name': name_receive}, {'$set': {'like': new_like}})
+    return jsonify({'msg': '좋아요!'})
+
+# 유튜버 크롤링
 @app.route('/api/search', methods=['POST'])
 def signUp():
 
@@ -61,17 +178,17 @@ def signUp():
 
     name = soup.select_one('meta[property="og:title"]')['content']
     desc = soup.select_one('meta[property="og:description"]')['content']
-    numofSub = soup.select_one('yt-formatted-string#subscriber-count').text
+    subscribers = soup.select_one('yt-formatted-string#subscriber-count').text
     photoURL = soup.select_one('meta[property="og:image"]')['content']
     thumbnail_video = 'https://www.youtube.com' + soup.select_one('div#items a#thumbnail', href=True)['href']
 
     doc = {
-        'likes': 0,
+        'like': 0,
         'name': name,
         'desc': desc,
         'photoURL': photoURL,
         'thumbnail_video': thumbnail_video,
-        'numofSub': numofSub,
+        'subscribers': subscribers,
     }
 
     db.youtube.insert_one(doc)

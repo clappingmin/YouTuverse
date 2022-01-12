@@ -1,0 +1,153 @@
+body {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+    background-color: rgb(24 24 24);
+    position: relative;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* HEADER */
+
+
+/* 메인 페이지 */
+.inner {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 80px 0 0;
+}
+
+
+.inner .top3-cards {
+    /*position: absolute;*/
+    /*    top: 80px;*/
+}
+
+.inner .top3-cards h3 {
+    /*background-color: rgb(24 24 24);*/
+    /*background-color: yellow;*/
+    font-size: 35px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.inner #top3-cards {
+    background-color: rgb(32 32 32);
+    border-radius: 10px;
+    width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.inner .cards {
+    background-color: rgb(32 32 32);
+    border-radius: 10px;
+    width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.inner .cards .rank {
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}
+
+.inner .cards .card {
+    width: 300px;
+    height: 200px;
+    background-color: rgb(87, 87, 87);
+    border: #000;
+    border-radius: 10px;
+    position: relative;
+    margin: 25px;
+    transition: transform .8s,
+    background-color 0.6s;
+}
+
+.inner .cards .card:hover {
+    background-color: #d21818;
+    filter: brightness(70%);
+    transform: scale(1.2);
+    z-index: 99;
+}
+
+.inner .cards .card a {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.inner .cards .card a .card-img {
+    width: 60%;
+    height: 100%;
+    margin: auto 0;
+    border-radius: 10px 0 0 10px;
+}
+
+.inner .cards .card a .youtuber-info {
+    width: 40%;
+    margin: auto 0;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.inner .cards .card a .card-title {
+    color: #fff;
+    max-height: 60px;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.inner .cards .card a .card-info {
+    color: #fff;
+    text-align: left;
+    display: block;
+    margin: auto;
+    font-size: 18px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space:nowrap
+}
+
+.inner .cards .card a .youtuber-info span {
+    font-size: 10px;
+    color: rgb(185, 185, 185);
+}
+
+
+.inner .all-cards h3 {
+    background-color: rgb(24 24 24);
+    font-size: 35px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+
+

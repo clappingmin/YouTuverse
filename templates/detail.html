@@ -29,7 +29,7 @@
 
     <!-- 구글폰트 -->
 
-    <title>YouTuverse | Home</title>
+    <title>YouTuverse | 유튜버</title>
 
     <!-- Open Graphs -->
     <meta property="og:title" content="YouTuverse | 홈">
@@ -39,6 +39,21 @@
     <meta property="og:imgae" content="">
 
     <script>
+        function like_youtube() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/like',
+                data: {
+                    'name_give': "{{ keyword }}"
+                },
+                success: function (response) {
+                    console.log(response)
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+        
         $(document).ready(function () {
 
             $(window).scroll(function () {
@@ -66,7 +81,7 @@
     <div class="inner">
         <a href="/" id="logo-title">
             <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
-            <h1 id="title">YouTuverse</h1>
+            <h1 id = "title">YouTuverse</h1>
         </a>
         <ul class="menu">
             <li>
@@ -94,57 +109,44 @@
         </ul>
     </div>
 </header>
-<!-- 메인 페이지 -->
-<div class="inner">
-    <!--위로가기-->
-    <div class="top3-cards">
-        <h3>좋아요 top3. </h3>
-        <div class="cards" id="top3-cards">
-            {% for youtuber in top3youtubers %}
-            {% set photo = youtuber['photoURL'] %}
-            {% set name = youtuber['name'] %}
-            {% set numofSub = youtuber['numofSub'] %}
-            {% set likes = youtuber['likes'] %}
-            <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
-                <a href="#">
-                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
-                    <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
-                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
-                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="all-cards">
-        <h3>전체 유튜버</h3>
-        <div class="cards" id="all-cards">
-            {% for youtuber in youtubers %}
-            {% set photo = youtuber['photoURL'] %}
-            {% set name = youtuber['name'] %}
-            {% set numofSub = youtuber['numofSub'] %}
-            {% set likes = youtuber['likes'] %}
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
-                <a href="#">
-                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
-                    <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
-                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
-                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon">
-
+<div class="wrap">
+  <div class="container">
+      <div class="d-flex justify-content-between align-items-end">
+          {% for youtuber in youtubers %}
+              {% if keyword == youtuber.name %}
+                  <div class="d-flex justify-content-between align-items-end">
+                      <div class="media">
+                          <div class="media-left">
+                              <figure>
+                                  <img class="image" src="{{ youtuber.photoURL }}" alt="Placeholder image"/>
+                              </figure>
+                          </div>
+                          <div class="media-content">
+                              <p class="font1">{{ youtuber.name }}</p>
+                              <p class="font2">{{ youtuber.desc }}</p>
+                              <p class="font2">{{ youtuber.subscribers }}</p>
+                              <a href="{{ youtuber.thumbnail_video }}">최근영상 보러가기</a>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                      <button id="button" onclick="like_youtube()" type="button" class="btn btn-light">
+                          좋아요:{{ youtuber.like }}명
+                      </button>
+                  </div>
+              {% endif %}
+          {% endfor %}
+      </div>
+  </div>
 </div>
+<!-- 메인 페이지 -->
+<!-- <div class="inner"> -->
+    <!-- <h1>디테일 페이지</h1> -->
+    <!-- <div id="data"> -->
+    <!--위로가기-->
+    <!-- <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon"> -->
+<!-- </div> -->
 
-<script src="../static/js/load.js"></script>
 <script src="../static/js/login.js"></script>
 </body>
 </html>

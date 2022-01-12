@@ -44,7 +44,7 @@
                 type: 'POST',
                 url: '/api/like',
                 data: {
-                    'name_give': "{{ keyword }}"
+                    'name_give': "{{ youtuber.name }}"
                 },
                 success: function (response) {
                     console.log(response)
@@ -112,8 +112,6 @@
 <div class="wrap">
   <div class="container">
       <div class="d-flex justify-content-between align-items-end">
-          {% for youtuber in youtubers %}
-              {% if keyword == youtuber.name %}
                   <div class="d-flex justify-content-between align-items-end">
                       <div class="media">
                           <div class="media-left">
@@ -133,9 +131,7 @@
                       <button id="button" onclick="like_youtube()" type="button" class="btn btn-light">
                           좋아요:{{ youtuber.like }}명
                       </button>
-                  </div>
-              {% endif %}
-          {% endfor %}
+                  </div>  
       </div>
   </div>
 </div>

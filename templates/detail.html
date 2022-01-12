@@ -70,6 +70,12 @@
         $('html, body').animate({scrollTop: 0}, '300');
       });
     });
+
+    function move_search() {
+        let keyword = $("#input").val();
+        console.log(keyword)
+        window.location.href = `/search/${keyword}`
+    }
   </script>
 </head>
 <body>
@@ -133,6 +139,11 @@
   </div>
 </div>
 
+<!-- Footer -->
+<footer>
+  <p>Copyright &copy; 2022. <span>YouTuverse</span>. All Rights Reserved.</p>
+  <a href="https://github.com/Hyeon-Gwang/YouTuverse">Github.</a>
+</footer>
 <script src="../static/js/login.js"></script>
 </body>
 </html>

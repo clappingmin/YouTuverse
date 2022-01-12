@@ -141,29 +141,26 @@ header .search .material-icons {
 }
 
 footer {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 80px;
     background-color: rgb(32 32 32);
-    padding-top: 5rem !important;
-    padding-bottom: 5rem !important;
-    vertical-align: middle;
 }
 
-footer .f-container p {
-    text-align: center;
-    margin: auto;
+footer > p {
+    margin-bottom: 4px;
     font-weight: lighter;
 }
 
-footer .f-container a {
-    display: block;
+footer > a {
     color: #fff;
     font-weight: lighter;
-    text-align: center;
-    margin: auto;
-    font-weight: lighter;
-    text-align: center;
+    text-decoration: underline !important;
 }
-
-footer .f-container p span {
-    text-align: center;
+footer > p > span {
     color: red;
 }
+
+footer > a:hover{
+    color: red;
+}
+

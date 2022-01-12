@@ -1,14 +1,22 @@
 .sign-up-page,
 .log-in-page{
+  position: relative;
   min-height: 100vh; padding-top: 1px;
 }
-.inner{
-  width: 1200px; margin: 0 auto;
+.sign-up-page > .inner,
+.log-in-page > .inner{
+  position: relative;
+  width: 1200px; min-height: calc(100vh - 161px); margin: 0 auto;
+}
+
+.log-in-page.login-pw-page > .inner{
+  min-height: calc(110vh - 161px);
 }
 
 .sign-up-form,
 .log-in-form{
-  width: 380px; padding: 16px; margin: 200px auto 0;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 380px; padding: 16px;
   background-color: #fff; border-radius: 6px;
   box-shadow: rgba(255, 255, 255, 0.5) 0px 7px 29px 0px;
   /*box-shadow: rgba(255, 255, 255, 0.7) 0px 5px 15px;*/

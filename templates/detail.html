@@ -53,6 +53,21 @@
 
         });
 
+        function like_youtube() {
+            $.ajax({
+                type: 'POST',
+                url: '/api/like',
+                data: {
+                    'name_give': "{{ keyword }}"
+                },
+                success: function (response) {
+                    console.log(response)
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+
     </script>
 
 </head>

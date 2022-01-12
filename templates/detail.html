@@ -122,14 +122,14 @@
                           <div class="media-content">
                               <p class="font1">{{ youtuber.name }}</p>
                               <p class="font2">{{ youtuber.desc }}</p>
-                              <p class="font2">{{ youtuber.subscribers }}</p>
+                              <p class="font2">{{ youtuber.numofSub }}</p>
                               <a href="{{ youtuber.videoSrc }}">최근영상 보러가기</a>
                           </div>
                       </div>
                   </div>
                   <div>
                       <button id="button" onclick="like_youtube()" type="button" class="btn btn-light">
-                          좋아요:{{ youtuber.like }}명
+                          좋아요:{{ youtuber.likes }}명
                       </button>
                   </div>  
       </div>

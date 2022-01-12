@@ -173,7 +173,7 @@ def signUp():
 
     name = soup.select_one('meta[property="og:title"]')['content']
     desc = soup.select_one('meta[property="og:description"]')['content']
-    subscribers = soup.select_one('yt-formatted-string#subscriber-count').text
+    numofSub = soup.select_one('yt-formatted-string#subscriber-count').text
     photoURL = soup.select_one('meta[property="og:image"]')['content']
     videoSrc = 'https://www.youtube.com' + soup.select_one('div#items a#thumbnail', href=True)['href']
 
@@ -183,7 +183,7 @@ def signUp():
         'desc': desc,
         'photoURL': photoURL,
         'videoSrc': videoSrc,
-        'subscribers': subscribers,
+        'numofSub': numofSub,
     }
 
     db.youtuber.insert_one(doc)

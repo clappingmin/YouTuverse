@@ -50,18 +50,32 @@
       }
       
       $.ajax({
-          type: "POST",
-          url: `/api/search`,
-          data: {
-              url_give: url
-          },
-          success: function (response) {
-              if (response["result"] == "success") {
-                  alert(response["msg"]);
-                  window.location.href='/';
-              }
-          }
-      });
+                type: "POST",
+                url: `/api/urlsave`,
+                data: {
+                    url_give: url
+                },
+                beforeSend: function () {
+                    //통신을 시작할때 처리되는 함수
+                    // 현재 html 문서위에 있는 마우스 커서를 로딩 중 커서로 변경
+                    jQuery(document).ready(function () {
+                        $('#myModal').css("cursor", "wait").show();
+                        setTimeout(function () {
+                        $('#myModal').hide();
+                        }, 20000);
+                    });
+                },
+                complete: function () {
+                    //통신이 완료된 후 처리되는 함수
+                    $('html').css("cursor", "auto"); // 통신이 완료 된 후 다시 일반적인 커서 모양으로 변경
+                },
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"]);
+                        window.location.href = '/';
+                    }
+                }
+            });
   }
 
     $(document).ready(function () {
@@ -88,6 +102,8 @@
 <body>
 <!--Header-->
 <header>
+    <div id="myModal" class="modal">
+    </div>
     <div class="containner">
         <a href="/" id="logo-title">
             <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">

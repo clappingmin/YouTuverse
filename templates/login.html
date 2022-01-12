@@ -40,11 +40,11 @@
 <div class="log-in-page">
     <!--Header-->
     <header>
-        <div class="inner">
-        <a href="/" id="logo-title">
-            <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
-            <div id = "title">YouTuverse</div>
-        </a>
+        <div class="containner">
+            <a href="/" id="logo-title">
+                <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
+                <h1 id="title">YouTuverse</h1>
+            </a>
             <ul class="menu">
                 <li>
                     <div class="search">
@@ -55,12 +55,19 @@
                 <li>
                     <a href="#">유튜버 추가</a>
                 </li>
+                {% if user %}
+                <span>안녕하세요 {{ user['nickname'] }}님!</span>
+                <li id="logoutBtn">
+                    로그아웃
+                </li>
+                {% else %}
                 <li>
                     <a href="/login">로그인</a>
                 </li>
                 <li>
                     <a href="/signup">회원가입</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </header>

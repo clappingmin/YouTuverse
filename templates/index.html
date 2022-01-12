@@ -38,32 +38,32 @@
     <meta property="og:url" content="">
     <meta property="og:imgae" content="">
 
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
-            $(window).scroll(function () {
-                // top button controll
-                if ($(this).scrollTop() > 100) {
-                    $('#up-btn').fadeIn();
-                } else {
-                    $('#up-btn').fadeOut();
-                }
-            });
-
-            // 위로 올라가기 버튼
-            $("#up-btn").click(function () {
-                $('html, body').animate({scrollTop: 0}, '300');
-            });
-
+        $(window).scroll(function () {
+            // top button controll
+            if ($(this).scrollTop() > 100) {
+                $('#up-btn').fadeIn();
+            } else {
+                $('#up-btn').fadeOut();
+            }
         });
 
-    </script>
+        // 위로 올라가기 버튼
+        $("#up-btn").click(function () {
+            $('html, body').animate({scrollTop: 0}, '300');
+        });
+
+    });
+
+</script>
 
 </head>
 <body>
 <!--Header-->
 <header>
-    <div class="inner">
+    <div class="containner">
         <a href="/" id="logo-title">
             <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
             <h1 id="title">YouTuverse</h1>

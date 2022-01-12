@@ -102,11 +102,10 @@
             {% for youtuber in top3youtubers %}
             {% set photo = youtuber['photoURL'] %}
             {% set name = youtuber['name'] %}
-            {% set id = youtuber['id'] %}
             {% set numofSub = youtuber['numofSub'] %}
             {% set likes = youtuber['likes'] %}
             <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
+            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
                 <a href="#">
                     <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
                     <div class="youtuber-info">
@@ -125,10 +124,9 @@
             {% for youtuber in youtubers %}
             {% set photo = youtuber['photoURL'] %}
             {% set name = youtuber['name'] %}
-            {% set id = youtuber['id'] %}
             {% set numofSub = youtuber['numofSub'] %}
             {% set likes = youtuber['likes'] %}
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ id }}')">
+            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
                 <a href="#">
                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
                     <div class="youtuber-info">

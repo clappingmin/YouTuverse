@@ -49,9 +49,9 @@ def login_page():
 def pw_find_page():
     return render_template('login_pw.html')
 
-# URL 저장
+# URL 추가 페이지
 @app.route('/urlsave')
-def search():
+def url_save_page():
     token = request.cookies.get('YouTuverse_token')
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms = ['HS256'])
@@ -77,7 +77,21 @@ def show_want_youtuber(name):
     except jwt.ExpiredSignatureError:
         return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
     except jwt.exceptions.DecodeError:
-        return render_template('detail.html', user = None, youtuber=youtuber)
+        return redirect(url_for('login_page', msg = '로그인 정보가 없습니다.'))
+
+# 검색 결과 페이지로 이동
+@app.route('/search/<keyword>')
+def search(keyword):
+    token = request.cookies.get('YouTuverse_token')
+    youtubers = list(db.youtuber.find({'name':keyword}, {'_id': False}).sort("likes", -1))
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        user = db.users.find_one({'user_id': payload['user_id']})
+        return render_template('search.html', user = user, keyword=keyword, youtubers=youtubers)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for('login_page', msg = '로그인 정보가 없습니다.'))
 
 # APIs
 # 회원가입
@@ -193,16 +207,6 @@ def collect_youtuber_info():
 
     return jsonify({'result': 'success', 'msg': '업로드 완료!'})
     
-# 검색 결과 페이지로 이동
-@app.route('/search/<keyword>')
-def search(keyword):
-    # youtubers = db.youtuber.find_one({'name': keyword}, {'_id': False})
-    # youtubers = list(db.youtuber.find({}, {'_id': False}))
-    youtubers = list(db.youtuber.find({'name':keyword}, {'_id': False}).sort("likes", -1))
-    # youtubers = list(db.youtuber.find({'title': {'$regex': keyword}}, {'_id': False}).sort('like', -1))
-    print(len(youtubers))
-    print(youtubers)
-    return render_template('search.html', keyword=keyword, youtubers=youtubers)
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

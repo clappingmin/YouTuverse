@@ -1,18 +1,17 @@
 <!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- CSS 초기화   -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-    <!-- 부트스트랩   -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"/>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -21,22 +20,27 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <!-- CSS 파일 가져오기    -->
-    <!--    <link rel="stylesheet" href="../static/styles/main.css">-->
-    <link rel="stylesheet" href="../static/styles/global.css">
-
-    <!-- JS 파일 가져오기   -->
-    <script src="../static/js/load.js"></script>
-
-
     <!-- 머티리얼 아이콘을 위한 CDN 설치   -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <title>YouTuverse</title>
+    <!-- css -->
+    <link rel="stylesheet" href="../static/styles/global.css">
+    <link rel="stylesheet" href="../static/styles/main.css">
 
+    <!-- 구글폰트 -->
+
+    <title>YouTuverse | 유튜버</title>
+
+    <!-- Open Graphs -->
+    <meta property="og:title" content="YouTuverse | 홈">
+    <meta property="og:title" content="유익한 유튜버 정보를 공유하고 나에게 맞는 유튜버 정보를 얻어갈 수 있는 공간!! YouTuverse 입니다!!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:imgae" content="">
 
     <script>
         $(document).ready(function () {
+
             $(window).scroll(function () {
                 // top button controll
                 if ($(this).scrollTop() > 100) {
@@ -60,8 +64,9 @@
 <!--Header-->
 <header>
     <div class="inner">
-        <a href="/" class="title">
-            <div class="title">YouTuverse</div>
+        <a href="/" id="logo-title">
+            <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
+            <h1 id = "title">YouTuverse</h1>
         </a>
         <ul class="menu">
             <li>
@@ -74,17 +79,17 @@
                 <a href="#">유튜버 추가</a>
             </li>
             {% if user %}
-                <span>안녕하세요 {{ user['nickname'] }}님!</span>
-                <li id="logoutBtn">
-                    로그아웃
-                </li>
+            <span>안녕하세요 {{ user['nickname'] }}님!</span>
+            <li id="logoutBtn">
+                로그아웃
+            </li>
             {% else %}
-                <li>
-                    <a href="/login">로그인</a>
-                </li>
-                <li>
-                    <a href="/signup">회원가입</a>
-                </li>
+            <li>
+                <a href="/login">로그인</a>
+            </li>
+            <li>
+                <a href="/signup">회원가입</a>
+            </li>
             {% endif %}
         </ul>
     </div>
@@ -93,7 +98,7 @@
 <div class="inner">
     <h1>디테일 페이지</h1>
     <div id="data">
-<!--        {# # id, name, photoURL, likes, url, videoSrc#}-->
+        <!--        {# # id, name, photoURL, likes, url, videoSrc#}-->
         <div class="id">ID : {{ id }}</div>
         <div class="name">유튜버 이름 : {{ name }}</div>
         <div class="photoURL">유튜버 사진 : {{ photoURL }}</div>

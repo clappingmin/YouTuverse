@@ -37,35 +37,36 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:imgae" content="">
-</head>
-<script>
-    $(document).ready(function () {
 
-        $(window).scroll(function () {
-            // top button controll
-            if ($(this).scrollTop() > 100) {
-                $('#up-btn').fadeIn();
-            } else {
-                $('#up-btn').fadeOut();
-            }
+    <script>
+        $(document).ready(function () {
+
+            $(window).scroll(function () {
+                // top button controll
+                if ($(this).scrollTop() > 100) {
+                    $('#up-btn').fadeIn();
+                } else {
+                    $('#up-btn').fadeOut();
+                }
+            });
+
+            // 위로 올라가기 버튼
+            $("#up-btn").click(function () {
+                $('html, body').animate({scrollTop: 0}, '300');
+            });
+
         });
 
-        // 위로 올라가기 버튼
-        $("#up-btn").click(function () {
-            $('html, body').animate({scrollTop: 0}, '300');
-        });
-
-    });
-
-</script>
+    </script>
 
 </head>
 <body>
 <!--Header-->
 <header>
     <div class="inner">
-        <a href="/" class="title">
-            <div class="title">YouTuverse</div>
+        <a href="/" id="logo-title">
+            <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
+            <h1 id="title">YouTuverse</h1>
         </a>
         <ul class="menu">
             <li>
@@ -128,7 +129,7 @@
             {% set likes = youtuber['likes'] %}
             <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
                 <a href="#">
-                   <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
                     <div class="youtuber-info">
                         <div class="card-title">{{ name }}</div>
                         <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>

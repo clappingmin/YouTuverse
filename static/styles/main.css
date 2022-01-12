@@ -57,7 +57,7 @@ a {
 .inner .cards .card {
     width: 300px;
     height: 200px;
-    background-color: rgb(40 40 40);
+    background-color: rgb(87, 87, 87);
     border: #000;
     border-radius: 10px;
     position: relative;
@@ -67,7 +67,7 @@ a {
 }
 
 .inner .cards .card:hover {
-    background-color: #000;
+    background-color: #d21818;
     filter: brightness(70%);
     transform: scale(1.2);
     z-index: 999;

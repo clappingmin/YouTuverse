@@ -36,13 +36,27 @@ a {
     font-weight: bold;
 }
 
+.inner #top3-cards {
+    background-color: rgb(32 32 32);
+    border-radius: 10px;
+    width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
 .inner .cards {
     background-color: rgb(32 32 32);
     border-radius: 10px;
     width: 1200px;
     margin: auto;
     padding: 20px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     flex-wrap: wrap;
     justify-content: center;
 

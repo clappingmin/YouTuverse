@@ -114,16 +114,5 @@ a {
     font-weight: bold;
 }
 
-.inner #up-btn {
-    width: 60px;
-    height: 60px;
-    position: fixed;
-    z-index: 999;
-    bottom: 20px;
-    right: 20px;
-    -webkit-box-shadow: 0 1px 2px 0 #777;
-    box-shadow: 0 1px 2px 0 #777;
-    border-radius: 100px;
-    filter: invert(100%);
-}
+
 

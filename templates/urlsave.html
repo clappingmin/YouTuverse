@@ -25,20 +25,45 @@
 
     <!-- css -->
     <link rel="stylesheet" href="../static/styles/global.css">
-    <link rel="stylesheet" href="../static/styles/main.css">
+    <link rel="stylesheet" href="../static/styles/urlsave.css">
 
     <!-- 구글폰트 -->
 
     <title>YouTuverse | Home</title>
 
     <!-- Open Graphs -->
-    <meta property="og:title" content="YouTuverse | 홈">
+    <meta property="og:title" content="YouTuverse | 검색">
     <meta property="og:title" content="유익한 유튜버 정보를 공유하고 나에게 맞는 유튜버 정보를 얻어갈 수 있는 공간!! YouTuverse 입니다!!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:imgae" content="">
-
+</head>
 <script>
+  function upload_youtube() {
+
+      let url = $('#url_upload').val()
+          
+      if (url.indexOf('youtube') === -1) {
+          alert('유튜브 영상만 링크만 가능합니다.');
+          $('#url_upload').val('');
+          return false;
+      }
+      
+      $.ajax({
+          type: "POST",
+          url: `/api/search`,
+          data: {
+              url_give: url
+          },
+          success: function (response) {
+              if (response["result"] == "success") {
+                  alert(response["msg"]);
+                  window.location.href='/';
+              }
+          }
+      });
+  }
+
     $(document).ready(function () {
 
         $(window).scroll(function () {
@@ -94,57 +119,17 @@
         </ul>
     </div>
 </header>
-<!-- 메인 페이지 -->
-<div class="inner">
-    <!--위로가기-->
-    <div class="top3-cards">
-        <h3>좋아요 top3. </h3>
-        <div class="cards" id="top3-cards">
-            {% for youtuber in top3youtubers %}
-            {% set photo = youtuber['photoURL'] %}
-            {% set name = youtuber['name'] %}
-            {% set numofSub = youtuber['numofSub'] %}
-            {% set likes = youtuber['likes'] %}
-            <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
-                <a href="#">
-                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
-                    <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
-                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
-                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="all-cards">
-        <h3>전체 유튜버</h3>
-        <div class="cards" id="all-cards">
-            {% for youtuber in youtubers %}
-            {% set photo = youtuber['photoURL'] %}
-            {% set name = youtuber['name'] %}
-            {% set numofSub = youtuber['numofSub'] %}
-            {% set likes = youtuber['likes'] %}
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
-                <a href="#">
-                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
-                    <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
-                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
-                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon">
 
+<div class="wrap">
+  <div class="container">
+    <div class="url_input_box input-group mb-3">
+      <input class="input" type="text" placeholder="URL 입력 후 업로드 완료! 창을 기다려주세요" id="url_upload"
+        id="basic-url" aria-describedby="basic-addon3">
+      <button id="button" onclick="upload_youtube()" class="btn btn-light">업로드</button>
+    </div>
+  </div>
 </div>
 
-<script src="../static/js/load.js"></script>
 <script src="../static/js/login.js"></script>
 </body>
 </html>

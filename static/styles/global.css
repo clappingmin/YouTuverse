@@ -23,12 +23,11 @@ a:link {
 header {
     height: 80px;
     width: 100%;
-
 }
 
 header .containner {
     height: inherit;
-    width: 100%;
+    width: 100%; min-width: 1200px;
     display: flex;
     background-color: rgb(32 32 32);
     border: rgb(56 55 56);

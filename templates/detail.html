@@ -1,147 +1,137 @@
 <!doctype html>
 <html lang="ko">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- CSS 초기화   -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- CSS 초기화   -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
 
-    <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <!-- 머티리얼 아이콘을 위한 CDN 설치   -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- 머티리얼 아이콘을 위한 CDN 설치   -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- css -->
-    <link rel="stylesheet" href="../static/styles/global.css">
-    <link rel="stylesheet" href="../static/styles/main.css">
+  <!-- css -->
+  <link rel="stylesheet" href="../static/styles/global.css">
+  <link rel="stylesheet" href="../static/styles/main.css">
 
-    <!-- 구글폰트 -->
+  <!-- 구글폰트 -->
 
-    <title>YouTuverse | 유튜버</title>
+  <title>YouTuverse | 유튜버</title>
 
-    <!-- Open Graphs -->
-    <meta property="og:title" content="YouTuverse | 홈">
-    <meta property="og:title" content="유익한 유튜버 정보를 공유하고 나에게 맞는 유튜버 정보를 얻어갈 수 있는 공간!! YouTuverse 입니다!!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-    <meta property="og:imgae" content="">
+  <!-- Open Graphs -->
+  <meta property="og:title" content="YouTuverse | 홈">
+  <meta property="og:title" content="유익한 유튜버 정보를 공유하고 나에게 맞는 유튜버 정보를 얻어갈 수 있는 공간!! YouTuverse 입니다!!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:imgae" content="">
 
-    <script>
-        function like_youtube() {
-            $.ajax({
-                type: 'POST',
-                url: '/api/like',
-                data: {
-                    'name_give': "{{ youtuber.name }}"
-                },
-                success: function (response) {
-                    console.log(response)
-                    alert(response['msg']);
-                    window.location.reload();
-                }
-            });
+  <script>
+    function like_youtube() {
+      $.ajax({
+        type: 'POST',
+        url: '/api/like',
+        data: {
+          'name_give': "{{ youtuber.name }}"
+        },
+        success: function (response) {
+          console.log(response)
+          alert(response['msg']);
+          window.location.reload();
         }
-        
-        $(document).ready(function () {
+      });
+    }
+      
+    $(document).ready(function () {
 
-            $(window).scroll(function () {
-                // top button controll
-                if ($(this).scrollTop() > 100) {
-                    $('#up-btn').fadeIn();
-                } else {
-                    $('#up-btn').fadeOut();
-                }
-            });
-
-            // 위로 올라가기 버튼
-            $("#up-btn").click(function () {
-                $('html, body').animate({scrollTop: 0}, '300');
-            });
-
-        });
-
-    </script>
-
+      $(window).scroll(function () {
+        // top button controll
+        if ($(this).scrollTop() > 100) {
+          $('#up-btn').fadeIn();
+        } else {
+          $('#up-btn').fadeOut();
+        }
+      });
+      
+      // 위로 올라가기 버튼
+      $("#up-btn").click(function () {
+        $('html, body').animate({scrollTop: 0}, '300');
+      });
+    });
+  </script>
 </head>
 <body>
 <!--Header-->
 <header>
-    <div class="inner">
-        <a href="/" id="logo-title">
-            <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
-            <h1 id = "title">YouTuverse</h1>
-        </a>
-        <ul class="menu">
-            <li>
-                <div class="search">
-                    <input type="text" placeholder="검색할 유튜버 입력하세요.">
-                    <div class="material-icons">search</div>
-                </div>
-            </li>
-            <li>
-                <a href="#">유튜버 추가</a>
-            </li>
-            {% if user %}
-            <span>안녕하세요 {{ user['nickname'] }}님!</span>
-            <li id="logoutBtn">
-                로그아웃
-            </li>
-            {% else %}
-            <li>
-                <a href="/login">로그인</a>
-            </li>
-            <li>
-                <a href="/signup">회원가입</a>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
+  <div class="inner">
+    <a href="/" id="logo-title">
+      <img id="logo-img" src="../static/images/youtuverse_logo.png" alt="유튜버스로고">
+      <h1 id = "title">YouTuverse</h1>
+    </a>
+    <ul class="menu">
+      <li>
+        <div class="search">
+          <input type="text" placeholder="검색할 유튜버 입력하세요.">
+          <div class="material-icons">search</div>
+        </div>
+      </li>
+      <li>
+        <a href="urlsave">유튜버 추가</a>
+      </li>
+      {% if user %}
+      <span>안녕하세요 {{ user['nickname'] }}님!</span>
+      <li id="logoutBtn">
+        로그아웃
+      </li>
+      {% else %}
+      <li>
+        <a href="/login">로그인</a>
+      </li>
+      <li>
+        <a href="/signup">회원가입</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
 </header>
 <div class="wrap">
   <div class="container">
+    <div class="d-flex justify-content-between align-items-end">
       <div class="d-flex justify-content-between align-items-end">
-                  <div class="d-flex justify-content-between align-items-end">
-                      <div class="media">
-                          <div class="media-left">
-                              <figure>
-                                  <img class="image" src="{{ youtuber.photoURL }}" alt="Placeholder image"/>
-                              </figure>
-                          </div>
-                          <div class="media-content">
-                              <p class="font1">{{ youtuber.name }}</p>
-                              <p class="font2">{{ youtuber.desc }}</p>
-                              <p class="font2">{{ youtuber.numofSub }}</p>
-                              <a href="{{ youtuber.videoSrc }}">최근영상 보러가기</a>
-                          </div>
-                      </div>
-                  </div>
-                  <div>
-                      <button id="button" onclick="like_youtube()" type="button" class="btn btn-light">
-                          좋아요:{{ youtuber.likes }}명
-                      </button>
-                  </div>  
+        <div class="media">
+          <div class="media-left">
+            <figure>
+              <img class="image" src="{{ youtuber.photoURL }}" alt="Placeholder image"/>
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="font1">{{ youtuber.name }}</p>
+            <p class="font2">{{ youtuber.desc }}</p>
+            <p class="font2">{{ youtuber.numofSub }}</p>
+            <a href="{{ youtuber.videoSrc }}">최근영상 보러가기</a>
+          </div>
+        </div>
       </div>
+      <div>
+        <button id="button" onclick="like_youtube()" type="button" class="btn btn-light">
+          좋아요:{{ youtuber.likes }}명
+        </button>
+      </div>  
+    </div>
   </div>
 </div>
-<!-- 메인 페이지 -->
-<!-- <div class="inner"> -->
-    <!-- <h1>디테일 페이지</h1> -->
-    <!-- <div id="data"> -->
-    <!--위로가기-->
-    <!-- <img id="up-btn" src="../static/images/up-icon.png" alt="up-icon"> -->
-<!-- </div> -->
 
 <script src="../static/js/login.js"></script>
 </body>

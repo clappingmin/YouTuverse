@@ -50,9 +50,9 @@ def pw_find_page():
     return render_template('login_pw.html')
 
 # URL 저장
-@app.route('/search')
+@app.route('/urlsave')
 def search():
-    return render_template('search.html')
+    return render_template('urlsave.html')
 
 # 유튜버 상세페이지로 데이터 전달
 @app.route('/youtuber/<name>')
@@ -175,14 +175,14 @@ def signUp():
     desc = soup.select_one('meta[property="og:description"]')['content']
     subscribers = soup.select_one('yt-formatted-string#subscriber-count').text
     photoURL = soup.select_one('meta[property="og:image"]')['content']
-    thumbnail_video = 'https://www.youtube.com' + soup.select_one('div#items a#thumbnail', href=True)['href']
+    videoSrc = 'https://www.youtube.com' + soup.select_one('div#items a#thumbnail', href=True)['href']
 
     doc = {
         'likes': 0,
         'name': name,
         'desc': desc,
         'photoURL': photoURL,
-        'thumbnail_video': thumbnail_video,
+        'videoSrc': videoSrc,
         'subscribers': subscribers,
     }
 

@@ -169,7 +169,7 @@ def like_youtube():
     return jsonify({'msg': '좋아요!'})
 
 # 유튜버 크롤링
-@app.route('/api/search', methods=['POST'])
+@app.route('/api/urlsave', methods=['POST'])
 def collect_youtuber_info():
 
     # 드라이버를 실행합니다.

@@ -157,7 +157,7 @@ def collect_youtuber_info():
     s = Service('./chromedriver.exe')
     driver = webdriver.Chrome(service=s)
     driver.get(url)  # 드라이버에 해당 url의 웹페이지를 띄웁니다.
-    sleep(1)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
+    sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
 
     req = driver.page_source  # html 정보를 가져옵니다.
     driver.quit()  # 정보를 가져왔으므로 드라이버는 꺼줍니다.

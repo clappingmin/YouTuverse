@@ -38,26 +38,31 @@
     <meta property="og:url" content="">
     <meta property="og:imgae" content="">
 
-<script>
-    $(document).ready(function () {
+    <script>
+        function parsing(num) {
+            return num.substr(4)
+        }
 
-        $(window).scroll(function () {
-            // top button controll
-            if ($(this).scrollTop() > 100) {
-                $('#up-btn').fadeIn();
-            } else {
-                $('#up-btn').fadeOut();
-            }
+        $(document).ready(function () {
+
+
+            $(window).scroll(function () {
+                // top button controll
+                if ($(this).scrollTop() > 100) {
+                    $('#up-btn').fadeIn();
+                } else {
+                    $('#up-btn').fadeOut();
+                }
+            });
+
+            // 위로 올라가기 버튼
+            $("#up-btn").click(function () {
+                $('html, body').animate({scrollTop: 0}, '300');
+            });
+
         });
 
-        // 위로 올라가기 버튼
-        $("#up-btn").click(function () {
-            $('html, body').animate({scrollTop: 0}, '300');
-        });
-
-    });
-
-</script>
+    </script>
 
 </head>
 <body>
@@ -79,43 +84,43 @@
                 <a href="/urlsave">유튜버 추가</a>
             </li>
             {% if user %}
-            <span>안녕하세요 {{ user['nickname'] }}님!</span>
-            <li id="logoutBtn">
-                로그아웃
-            </li>
+                <span>안녕하세요 {{ user['nickname'] }}님!</span>
+                <li id="logoutBtn">
+                    로그아웃
+                </li>
             {% else %}
-            <li>
-                <a href="/login">로그인</a>
-            </li>
-            <li>
-                <a href="/signup">회원가입</a>
-            </li>
+                <li>
+                    <a href="/login">로그인</a>
+                </li>
+                <li>
+                    <a href="/signup">회원가입</a>
+                </li>
             {% endif %}
         </ul>
     </div>
 </header>
 <!-- 메인 페이지 -->
 <div class="inner">
-    <!--위로가기-->
     <div class="top3-cards">
         <h3>좋아요 top3. </h3>
         <div class="cards" id="top3-cards">
             {% for youtuber in top3youtubers %}
-            {% set photo = youtuber['photoURL'] %}
-            {% set name = youtuber['name'] %}
-            {% set numofSub = youtuber['numofSub'] %}
-            {% set likes = youtuber['likes'] %}
-            <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
-                <a href="#">
-                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
-                    <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
-                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
-                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
-                    </div>
-                </a>
-            </div>
+                {% set photo = youtuber['photoURL'] %}
+                {% set name = youtuber['name'] %}
+                {% set numofSub = youtuber['numofSub']|string %}
+                {% set likes = youtuber['likes'] %}
+
+                <img src="../static/images/rank-icon-{{ loop.index }}.png" alt="랭킹" class="rank">
+                <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
+                    <a href="#">
+                        <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+                        <div class="youtuber-info">
+                            <div class="card-title">{{ name }}</div>
+                            <div class="card-info"><span>구독자 </span><script>document.write(parsing('{{ numofSub }}'))</script></div>
+                            <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -123,20 +128,20 @@
         <h3>전체 유튜버</h3>
         <div class="cards" id="all-cards">
             {% for youtuber in youtubers %}
-            {% set photo = youtuber['photoURL'] %}
-            {% set name = youtuber['name'] %}
-            {% set numofSub = youtuber['numofSub'] %}
-            {% set likes = youtuber['likes'] %}
-            <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
-                <a href="#">
-                    <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
-                    <div class="youtuber-info">
-                        <div class="card-title">{{ name }}</div>
-                        <div class="card-info"><span>구독자 </span>{{ numofSub }}명</div>
-                        <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
-                    </div>
-                </a>
-            </div>
+                {% set photo = youtuber['photoURL'] %}
+                {% set name = youtuber['name'] %}
+                {% set numofSub = youtuber['numofSub']|string %}
+                {% set likes = youtuber['likes'] %}
+                <div class="card" style="width: 18rem;" onclick="showwantYoutuber('{{ name }}')">
+                    <a href="#">
+                        <img class="card-img" src={{ photo }} alt="유튜버 로고사진">
+                        <div class="youtuber-info">
+                            <div class="card-title">{{ name }}</div>
+                            <div class="card-info"><span>구독자 </span><script>document.write(parsing('{{ numofSub }}'))</script></div>
+                            <div class="card-info"><span>좋아요 수 </span>{{ likes }}</div>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </div>
     </div>
@@ -146,5 +151,6 @@
 
 <script src="../static/js/load.js"></script>
 <script src="../static/js/login.js"></script>
+
 </body>
 </html>

@@ -55,24 +55,25 @@ def search():
     return render_template('search.html')
 
 # 유튜버 상세페이지로 데이터 전달
-@app.route('/youtuber/<id>')
-def show_want_youtuber(id):
+@app.route('/youtuber/<name>')
+def show_want_youtuber(name):
     token = request.cookies.get('YouTuverse_token')
-    # id, name, photoURL, likes, url, videoSrc
-    youtuber = db.youtuber.find_one({'id': id})
+    # name, photoURL, likes, url, videoSrc
+    youtuber = db.youtuber.find_one({'name': name})
     name = youtuber['name']
     photoURL = youtuber['photoURL']
     likes = youtuber['likes']
     url = youtuber['url']
     videoSrc = youtuber['videoSrc']
+
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
         user = db.users.find_one({'user_id': payload['user_id']})
-        return render_template('detail.html', user = user, id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
+        return render_template('detail.html', user = user, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
     except jwt.ExpiredSignatureError:
         return redirect(url_for('login_page', msg = '로그인 시간이 만료되었습니다.'))
     except jwt.exceptions.DecodeError:
-        return render_template('detail.html', user = None, id = id, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
+        return render_template('detail.html', user = None, name = name, photoURL = photoURL, likes = likes, url = url, videoSrc = videoSrc)
 
 # 상세페이지
 # @app.route('/detail/<keyword>')

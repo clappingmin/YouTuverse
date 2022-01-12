@@ -1,3 +1,3 @@
-function showwantYoutuber(id) {
-    window.location.href = `/youtuber/${id}`
+function showwantYoutuber(name) {
+    window.location.href = `/youtuber/${name}`
 }

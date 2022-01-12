@@ -27,7 +27,8 @@ header {
 
 header .containner {
     height: inherit;
-    width: 100%; min-width: 1200px;
+    width: 100%;
+    min-width: 1200px;
     display: flex;
     background-color: rgb(32 32 32);
     border: rgb(56 55 56);
@@ -137,4 +138,32 @@ header .search .material-icons {
     box-shadow: 0 1px 2px 0 #777;
     border-radius: 100px;
     filter: invert(100%);
+}
+
+footer {
+    background-color: rgb(32 32 32);
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+    vertical-align: middle;
+}
+
+footer .f-container p {
+    text-align: center;
+    margin: auto;
+    font-weight: lighter;
+}
+
+footer .f-container a {
+    display: block;
+    color: #fff;
+    font-weight: lighter;
+    text-align: center;
+    margin: auto;
+    font-weight: lighter;
+    text-align: center;
+}
+
+footer .f-container p span {
+    text-align: center;
+    color: red;
 }

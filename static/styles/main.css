@@ -17,20 +17,13 @@ a {
 
 /* 메인 페이지 */
 .inner {
+    height: 100%;
     width: 1200px;
     margin: 0 auto;
-    padding: 80px 0 0;
 }
 
-
-.inner .top3-cards {
-    /*position: absolute;*/
-    /*    top: 80px;*/
-}
 
 .inner .top3-cards h3 {
-    /*background-color: rgb(24 24 24);*/
-    /*background-color: yellow;*/
     font-size: 35px;
     padding: 20px;
     font-weight: bold;
@@ -52,14 +45,11 @@ a {
 .inner .cards {
     background-color: rgb(32 32 32);
     border-radius: 10px;
-    width: 1200px;
     margin: auto;
-    padding: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     flex-wrap: wrap;
-    justify-content: center;
-
+    place-items: center;
 }
 
 .inner .cards .rank {
@@ -69,7 +59,6 @@ a {
 }
 
 .inner .cards .card {
-    width: 300px;
     height: 200px;
     background-color: rgb(87, 87, 87);
     border: #000;
@@ -81,7 +70,7 @@ a {
 }
 
 .inner .cards .card:hover {
-    background-color: #d21818;
+    background-color: rgb(210, 24, 24);
     filter: brightness(70%);
     transform: scale(1.2);
     z-index: 99;
@@ -133,7 +122,7 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
-    white-space:nowrap
+    white-space: nowrap
 }
 
 .inner .cards .card a .youtuber-info span {

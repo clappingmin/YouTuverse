@@ -90,7 +90,8 @@ def show_want_youtuber(name):
 @app.route('/search/<keyword>')
 def search(keyword):
     token = request.cookies.get('YouTuverse_token')
-    youtubers = list(db.youtuber.find({'name': keyword}, {'_id': False}).sort("likes", -1))
+
+    youtubers = list(db.youtuber.find({'name': {'$regex': keyword}}, {'_id': False}).sort('likes', -1))
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
         user = db.users.find_one({'user_id': payload['user_id']})

@@ -39,44 +39,41 @@
     <meta property="og:imgae" content="">
 </head>
 <script>
-  function upload_youtube() {
+    function upload_youtube() {
 
-      let url = $('#url_upload').val()
-          
-      if (url.indexOf('youtube') === -1) {
-          alert('유튜브 영상만 링크만 가능합니다.');
-          $('#url_upload').val('');
-          return false;
-      }
+        let url = $('#url_upload').val()
+        const regExp = /(youtube\.com\/[acehlnrsu]*[^w]\/*[a-zA-Z0-9ㄱ-ㅎ가-힣_]+)/ig
+        const checkedURL = url.match(regExp)
+        if(!checkedURL) { return console.log('원하는 url 없음') }
       
-      $.ajax({
-                type: "POST",
-                url: `/api/urlsave`,
-                data: {
-                    url_give: url
-                },
-                beforeSend: function () {
-                    //통신을 시작할때 처리되는 함수
-                    // 현재 html 문서위에 있는 마우스 커서를 로딩 중 커서로 변경
-                    jQuery(document).ready(function () {
-                        $('#myModal').css("cursor", "wait").show();
-                        setTimeout(function () {
-                        $('#myModal').hide();
-                        }, 20000);
-                    });
-                },
-                complete: function () {
-                    //통신이 완료된 후 처리되는 함수
-                    $('html').css("cursor", "auto"); // 통신이 완료 된 후 다시 일반적인 커서 모양으로 변경
-                },
-                success: function (response) {
-                    if (response["result"] == "success") {
-                        alert(response["msg"]);
-                        window.location.href = '/';
-                    }
+        $.ajax({
+            type: "POST",
+            url: `/api/urlsave`,
+            data: {
+                url_give: url
+            },
+            beforeSend: function () {
+                //통신을 시작할때 처리되는 함수
+                // 현재 html 문서위에 있는 마우스 커서를 로딩 중 커서로 변경
+                jQuery(document).ready(function () {
+                    $('#myModal').css("cursor", "wait").show();
+                    setTimeout(function () {
+                    $('#myModal').hide();
+                    }, 20000);
+                });
+            },
+            complete: function () {
+                //통신이 완료된 후 처리되는 함수
+                $('html').css("cursor", "auto"); // 통신이 완료 된 후 다시 일반적인 커서 모양으로 변경
+            },
+            success: function (response) {
+                if (response["result"] == "success") {
+                    alert(response["msg"]);
+                    window.location.href = '/';
                 }
-            });
-  }
+            }
+        });
+    }
 
     $(document).ready(function () {
 

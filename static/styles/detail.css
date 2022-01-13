@@ -1,12 +1,9 @@
-.body {
+body {
   background-color: rgb(24 24 24);
   position: relative;
 }
 
-
-
 .container {
-  width: 80%;
   max-width: 800px;
   margin: 130px auto;
   padding: 20px;

@@ -185,8 +185,13 @@ def collect_youtuber_info():
     # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     # data = requests.get(url, headers=headers)
 
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    options.add_argument('window-size=1920x1080')
+    options.add_argument("disable-gpu")
+
     s = Service('./chromedriver.exe')
-    driver = webdriver.Chrome(service=s)
+    driver = webdriver.Chrome(service=s, chrome_options=options)
     driver.get(url)  # 드라이버에 해당 url의 웹페이지를 띄웁니다.
     sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
 
@@ -201,6 +206,11 @@ def collect_youtuber_info():
     numofSub = soup.select_one('yt-formatted-string#subscriber-count').text
     photoURL = soup.select_one('meta[property="og:image"]')['content']
     videoSrc = 'https://www.youtube.com' + soup.select_one('div#items a#thumbnail', href=True)['href']
+
+    isExist = db.youtuber.find_one({ 'name': name })
+    if(isExist):
+        print('이미 이ㅣㅆ음')
+        return jsonify({ 'result': 'fail', 'msg': '이미 등록된 유튜버입니다.' })
 
     doc = {
         'likes': 0,

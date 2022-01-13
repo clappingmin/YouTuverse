@@ -71,6 +71,9 @@
                     alert(response["msg"]);
                     window.location.href = '/';
                 }
+                if(response['result'] == 'fail') {
+                    alert(response['msg'])
+                }
             }
         });
     }

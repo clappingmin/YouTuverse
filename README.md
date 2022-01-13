@@ -22,6 +22,11 @@
 ## 결과물
 [YouTuverse](https://www.youtube.com/watch?v=wWhal-8jLPk)
 
+![1](https://user-images.githubusercontent.com/48178101/149340819-da707a28-f00e-4c34-8543-ea31e95489e2.gif)
+![2](https://user-images.githubusercontent.com/48178101/149340845-9413413d-0ba8-4dcb-b40c-ee9e64d41024.gif)
+![3](https://user-images.githubusercontent.com/48178101/149340864-0025efb8-423f-448c-926f-1b8d08439ac2.gif)
+
+
 ## 팀원 역할
 * 강경묵 
   * 검색페이지 연결

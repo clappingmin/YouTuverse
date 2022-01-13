@@ -89,8 +89,8 @@
         <ul class="menu">
             <li>
                 <div class="search">
-                    <input type="text" placeholder="검색할 유튜버 입력하세요.">
-                    <div class="material-icons" onclick="move_search()">search</div>
+                  <input type="text" id="input" onkeyup="if(window.event.keyCode==13){move_search()}" placeholder="검색할 유튜버 입력하세요.">
+                  <div class="material-icons" onclick="move_search()">search</div>
                 </div>
             </li>
             <li>

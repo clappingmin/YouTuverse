@@ -4,8 +4,7 @@ const $pwFindBtn = $('#pwFindBtn');
 const $signUpBtn = $('#signUpBtn');
 const $pwFindCheckBtn = $('#pwFindCheckBtn');
 
-$logInBtn.click((e) => {
-  e.preventDefault();
+function logIn() {
   let ID = $('#idInput').val();
   let PW = $('#pwInput').val();
 
@@ -26,21 +25,9 @@ $logInBtn.click((e) => {
       alert(res.msg);
     }
   });
-});
+};
 
-$signUpBtn.click((e) => {
-  e.preventDefault();
-  window.location.href = "/signup";
-});
-
-$pwFindBtn.click((e) => {
-  e.preventDefault();
-  window.location.href = '/login/pw'
-});
-
-$logoutBtn.click((e) => {
-  e.preventDefault();
-
+function logOut() {
   $.ajax({
     type: 'GET',
     url: '/api/user/logout',
@@ -56,14 +43,10 @@ $logoutBtn.click((e) => {
       alert('로그아웃에 실패하였습니다: ', error)
       window.location.href = '/'
     }
-  })
+  });
+};
 
-
-})
-
-$pwFindCheckBtn.click((e) => {
-  e.preventDefault();
-
+function findPassword() {
   const user_id = $('#pwFindIdInput').val()
   const password = $('#newPwInput').val()
   if(user_id === '') { return alert('아이디를 입력하세요.'); };
@@ -77,5 +60,48 @@ $pwFindCheckBtn.click((e) => {
       alert(res.msg);
       window.location.href = "/login"
     }
-  })
+  });
+};
+
+$logInBtn.click((e) => {
+  e.preventDefault();
+  logIn();
+});
+
+$signUpBtn.click((e) => {
+  e.preventDefault();
+  window.location.href = "/signup";
+});
+
+$pwFindBtn.click((e) => {
+  e.preventDefault();
+  window.location.href = '/login/pw'
+});
+
+$logoutBtn.click((e) => {
+  e.preventDefault();
+  logOut();
+})
+
+
+
+
+
+// 로그인
+$('#pwInput').on('keyup', (e) => {
+  e.preventDefault();
+  console.log('로그인');
+  if(window.event.keyCode === 13) { logIn(); };
+});
+
+// 비밀번호 찾기
+$pwFindCheckBtn.click((e) => {
+  e.preventDefault();
+  findPassword();
+});
+
+$('#newPwInput').on('keyup', (e) => {
+  e.preventDefault();
+  console.log('비번 찾기');
+  if(window.event.keycode === 13) { findPassword(); };
 })

@@ -187,12 +187,12 @@ def collect_youtuber_info():
     # data = requests.get(url, headers=headers)
 
     options = webdriver.ChromeOptions()
-    options.add_argument('headless')
-    options.add_argument('window-size=1920x1080')
-    options.add_argument("disable-gpu")
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument("--single-process")
+    options.add_argument("--disable-dev-shm-usage")
 
-    s = Service('./chromedriver.exe')
-    driver = webdriver.Chrome(service=s, chrome_options=options)
+    driver = webdriver.Chrome('./chromedriver', chrome_options = options)
     driver.get(url)  # 드라이버에 해당 url의 웹페이지를 띄웁니다.
     sleep(5)  # 페이지가 로딩되는 동안 5초 간 기다립니다.
 
@@ -210,7 +210,6 @@ def collect_youtuber_info():
 
     isExist = db.youtuber.find_one({ 'name': name })
     if(isExist):
-        print('이미 이ㅣㅆ음')
         return jsonify({ 'result': 'fail', 'msg': '이미 등록된 유튜버입니다.' })
 
     doc = {

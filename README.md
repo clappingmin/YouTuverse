@@ -19,6 +19,9 @@
 4. 좋아요 상위 3명과 이름순으로 유튜버 정보 가져오기
 5. selenium을 이용한 유튜버 크롤링
 
+## 결과물
+[YouTuverse](https://www.youtube.com/watch?v=wWhal-8jLPk)
+
 ## 팀원 역할
 * 강경묵 
   * 검색페이지 연결

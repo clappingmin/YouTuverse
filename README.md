@@ -4,7 +4,7 @@
 유익한 유튜버 정보를 공유하고 나에게 맞는 유튜버 정보를 얻어갈 수 있는 공간. YouTuverse 입니다.  
   
 ## S.A(Starting Assignment)
-[Youtuverse 노션 바로가기](https://www.notion.so/99-C-4-S-A-a2f0616ad2514adb9d0a415bc74b26c2)
+[Youtuverse 노션 바로가기](https://lateral-cause-588.notion.site/99-C-4-S-A-a2f0616ad2514adb9d0a415bc74b26c2)
 
 ## 개발 기간
 2022.01.10 - 2022.01.13
